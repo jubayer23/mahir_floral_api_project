@@ -1,0 +1,811 @@
+{
+	"info": {
+		"_postman_id": "552af8fb-e709-416d-8d8a-bdc624178226",
+		"name": "Mahire Floral",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Core",
+			"item": []
+		},
+		{
+			"name": "Shop Stocker",
+			"item": [
+				{
+					"name": "Entry Receive Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shop_stock_id\":4\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/shopstocker/entry_receive_product.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"shopstocker",
+								"entry_receive_product.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entry Sold Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost/core-api/shopstocker/entry_sold_item.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"shopstocker",
+								"entry_sold_item.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sold Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"description": "Admin",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"month\":3,\n\t\"year\":2019,\n\t\"filter_by_shop_id\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/shopstocker/get_sold_item.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"shopstocker",
+								"get_sold_item.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Delivered Stocks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"description": "admin",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "GdZy066DHdli4Xl8HUkxL3VdOhif7KewYx6oNpXVu6yeueEXiP",
+								"description": "Not Owner",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"month\":3,\n\t\"year\":2019,\n\t\"filter_by_shop_id\": 2\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/shopstocker/get_shop_stock.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"shopstocker",
+								"get_shop_stock.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Raw Stock",
+			"item": [
+				{
+					"name": "Get Delivered Stocks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"month\":\"03\",\n\t\"year\":2019\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/rawstocker/get_delivered_stock.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"rawstocker",
+								"get_delivered_stock.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Raw Stock Entry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product_name\":\"Booking Shop\",\n\t\"quantity\":4,\n\t\"unit\":\"45\",\n\t\"color\": \"234\",\n\t\"comment\": \"<script>alert(test);</script>\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/rawstocker/entry_raw_stock.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"rawstocker",
+								"entry_raw_stock.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entry Deliver Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shop_id\":\"1\",\n\t\"product_id\":1,\n\t\"quantity\":1,\n\t\"comment\": \"test\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/rawstocker/entry_deliver_product.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"rawstocker",
+								"entry_deliver_product.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get raw stocks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "jBUVO7Q9E5sCie6qGlKvamx5o2Aj23jLsFuJLkpTJVlHzjO3Yv",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\t\"month\":3,\r\n\t\"year\":2019\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/rawstocker/get_raw_stock.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"rawstocker",
+								"get_raw_stock.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ready Stock Entry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"product_name\":\"Booking Shop\",\n\t\"quantity\":4,\n\t\"price\":12,\n\t\"unit\":\"45\",\n\t\"color\": \"234\",\n\t\"comment\": \"<script>alert(test);</script>\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/rawstocker/entry_ready_stock.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"rawstocker",
+								"entry_ready_stock.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Ready Stock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"description": "admin",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "wuWE0KLOwmg9s3VEQH804j9Fb9OE81M7eHflQ4NugTGFIznVFr",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"month\":\"03\",\n\t\"year\":2019\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/rawstocker/get_ready_stock.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"rawstocker",
+								"get_ready_stock.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Staff Signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "WGavnGxMNFqtDZhJLHbF1mFBt3nVlcCKYZr0Se0E9hPYe6zEiZ",
+								"description": "admin",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"al11i@gmail.com\",\n    \"password\": \"testuedsr\",\n    \"name\": \"Ali\",\n    \"shop_id\":1,\n    \"role\": \"Raw Stock\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/staff/signup.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"staff",
+								"signup.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"zu0072010@gmail.com\",\n\t\"password\":\"testuser\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/staff/login.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"staff",
+								"login.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost/core-api/staff/get_user_info.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"staff",
+								"get_user_info.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shop",
+			"item": [
+				{
+					"name": "Shop Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "WGavnGxMNFqtDZhJLHbF1mFBt3nVlcCKYZr0Se0E9hPYe6zEiZ"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"shop_name\":\"Booking Shop\",\n\t\"location\":\"axyz\",\n\t\"latitude\":\"45\",\n\t\"longitude\": \"234\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/admin/shop_registration.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"admin",
+								"shop_registration.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Shops",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost/core-api/shop/getshops.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"shop",
+								"getshops.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Online Status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":1\n}"
+				},
+				"url": {
+					"raw": "http://localhost/core-api/staff/get_user_online_status.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"core-api",
+						"staff",
+						"get_user_online_status.php"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User Online Status",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_id\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost/core-api/staff/get_user_online_status.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"core-api",
+								"staff",
+								"get_user_online_status.php"
+							]
+						}
+					},
+					"status": "Service Unavailable",
+					"code": 503,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 23 Mar 2019 17:18:49 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.37 (Win32) OpenSSL/1.1.1a PHP/7.3.0"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.3.0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"status\": false,\n        \"message\": \"Unable To Signup Please Try Later\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "User Check",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\":8,\n\t\"user_check\": 0\n}"
+				},
+				"url": {
+					"raw": "http://localhost/core-api/staff/user_check.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"core-api",
+						"staff",
+						"user_check.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Timesheet By Week",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filter_type\":\"week\",\n\t\"week_num\": \"12\",\n\t\"year\": 2019\n}"
+				},
+				"url": {
+					"raw": "http://localhost/core-api/staff/timesheet.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"core-api",
+						"staff",
+						"timesheet.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Timesheet By Date",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filter_type\":\"date\",\n\t\"start_date\": \"18/03/2019\",\n\t\"end_date\": \"24/03/2019\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost/core-api/staff/timesheet.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"core-api",
+						"staff",
+						"timesheet.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

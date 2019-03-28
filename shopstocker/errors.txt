@@ -1,0 +1,15 @@
+{
+    "status": false,
+    "message": null,
+    "errors": {
+        "shop_stock_id": "Only  Shop Owner Can accept"
+    }
+}
+
+{
+    "status": false,
+    "message": null,
+    "errors": {
+        "shop_stock_id": "Shop Stock not exist Or Already Received"
+    }
+}
