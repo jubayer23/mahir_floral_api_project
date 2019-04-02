@@ -36,11 +36,13 @@
 				$user_exist = DB::query("SELECT * FROM users WHERE email = %s",$_POST['email']);
 				$user_exist = _row_array($user_exist);
 				if($user_exist){
-					$errors['email'] = "Email Already Register";
+					$message = "email already registered";
+					$errors['email'] = "email already registered";
 				}else{
 					$email=$_POST['email'];
 				}
 			}else{
+				$message = "Invalid Email";
 				$errors['email'] = "Invalid Email";
 			}
 		}
@@ -114,6 +116,12 @@
 			
 			if ($added) {
 				$user_id = DB::insertId();
+				//sorry here is error
+				$user_shop = [
+					'user_id' => $user_id,
+					'shop_id' => $shop_id,
+				];
+				DB::insert('user_shop',$user_shop);
 				echo json_encode(['status' => true,'message' => 'Successfully Registration','user_id' => $user_id]);exit;
 				return ['status' => true, 'message' => 'Successfully Login','access_token' => $api_key];
 			}

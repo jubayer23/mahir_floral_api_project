@@ -20,10 +20,10 @@ if($staff->check_role() == 'Admin'){
 		
 		if($data['status'] == false){
 			http_response_code(400);
-			echo json_encode(['response' => $data]);exit;
+			echo json_encode( $data);exit;
 		}
 		http_response_code(201);
-		echo json_encode(['response' => $data]);exit;
+		echo json_encode($data);exit;
 
 		//echo json_encode(['response' =>['status' => true,'message' => 'Successfully Registration']]);exit;
 	}else{
