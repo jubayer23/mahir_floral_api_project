@@ -66,6 +66,7 @@
 				$product_exist = DB::query("SELECT * FROM ready_stock WHERE id = %i AND quantity >= %i ",$_POST['product_id'],$quantity);
 				$product_exist = _row_array($product_exist);
 				if(!$product_exist){
+                    $message = 'Product not exist Or Less Quantity';
 					$errors['product_id'] = "Product not exist Or Less Quantity";
 				}else{
 					$product_id=$_POST['product_id'];
@@ -108,8 +109,11 @@
 			//when shop stock user received  			
 			$added = DB::insert($this->table,$shop_data);
 			if($added){
+			    $shop_stock_id = DB::insertId();
+
 				$is_update = DB::query("UPDATE ready_stock SET quantity= quantity - %i WHERE id=%i", $quantity, $product_id);
 				$this->status_code = 201;
+
 				return array('status' => true,'shop_stock_id' => $shop_stock_id, 'message' => 'Ready To Deliver Shop Stocker');
 			}
 		}
@@ -117,7 +121,7 @@
 				
 	}
 	
-	public function get()
+	public function getDeliveredStocks()
     {
 		$validator = new Validator();
 		$errors = [];
@@ -238,13 +242,18 @@
 			FROM `shop_stock` S 
 			JOIN shop D On D.id = S.shop_id 
 			JOIN ready_stock R On R.id = S.product_id
-			WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']			
+			WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']." AND S.shop_id = ".$_POST['filter_by_shop_id']
 			);//
 
 			if($shopStocks ){
 				$this->status_code = 200;
 				return array('status' => true,'shopStocks' => $shopStocks);
-			}
+			}else{
+                $this->status_code = 400;
+                $message = "no data";
+                $shopStocks = [];
+                return ['status' => false ,  'shopStocks'  => $shopStocks];
+            }
 		
 		}
 		
