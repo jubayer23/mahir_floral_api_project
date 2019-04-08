@@ -244,6 +244,9 @@ class Staff
                 } else {
                     $user_id = $_POST['user_id'];
                 }
+
+
+
             } else {
                 $errors['user_id'] = "User Is Integer";
             }
@@ -256,7 +259,20 @@ class Staff
             return ['status' => false, 'message' => 'INVALID', 'errors' => $errors];
         } else {
             //$this->status_code = 200;
-            return array('status' => true, 'message' => null, 'Online' => $user_exist['is_online']);
+            if($user_exist['is_online'] == 1){
+                $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $_POST['user_id']);
+
+                if ($user_checks_by_id[0]['check_in']) {
+                    //$this->status_code = 400;
+                   // return array('status' => false, 'message' => 'User Already Check-out');
+                    return array('status' => true, 'message' => null, 'Online' => $user_exist['is_online'], 'last_checked_in' => $user_checks_by_id[0]['check_in']);
+                }
+            }else{
+                return array('status' => true, 'message' => null, 'Online' => $user_exist['is_online']);
+            }
+
+
+
         }
         //$this->status_code = 503;
         return ['status' => false, "message" => "Please Try Later"];
