@@ -147,7 +147,7 @@ class Staff
         if ($user_info) {
             $user_info = _row_array($user_info);
             //$this->status_code = 200;
-            return array('status' => true, 'message' => null, 'user_info' => $user_info);
+            return array('status' => true, 'message' => null, 'user_profile' => $user_info);
         }
 
     }
@@ -259,17 +259,16 @@ class Staff
             return ['status' => false, 'message' => 'INVALID', 'errors' => $errors];
         } else {
             //$this->status_code = 200;
-            if($user_exist['is_online'] == 1){
-                $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $_POST['user_id']);
 
-                if ($user_checks_by_id[0]['check_in']) {
-                    //$this->status_code = 400;
-                   // return array('status' => false, 'message' => 'User Already Check-out');
-                    return array('status' => true, 'message' => null, 'Online' => $user_exist['is_online'], 'last_checked_in' => $user_checks_by_id[0]['check_in']);
-                }
-            }else{
-                return array('status' => true, 'message' => null, 'Online' => $user_exist['is_online']);
-            }
+            $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $_POST['user_id']);
+            return array('status' => true,
+                'message' => null,
+                'Online' => $user_exist['is_online'],
+                'last_checked_in' => $user_checks_by_id[0]['check_in'],
+                'last_checked_out' => $user_checks_by_id[0]['check_out']
+            );
+
+
 
 
 
@@ -469,7 +468,13 @@ class Staff
                 DB::update('user_check', array('check_out' => $check_out), "id=%i", $user_checks_by_id[0]['id']);
                 DB::update('users', array('is_online' => $user_check), "id=%i", $user_id);
                 //$this->status_code = 201;
-                return array('status' => true, 'message' => 'User Successfully Check-out');
+                //array('status' => true, 'message' => null, 'Online' => $user_exist['is_online'], 'last_checked_in' => $user_checks_by_id[0]['check_in']);
+                return array('status' => true,
+                    'message' => 'User Successfully Check-out',
+                    'Online' => $user_check,
+                    'last_checked_in' => $user_checks_by_id[0]['check_in'],
+                    'last_checked_out' => $check_out
+                    );
 
 
             } else {
@@ -483,7 +488,13 @@ class Staff
                 if ($added) {
                     DB::update('users', array('is_online' => $user_check), "id=%i", $user_id);
                    // $this->status_code = 201;
-                    return array('status' => true, 'message' => 'User Successfully Check-in');
+                   // return array('status' => true, 'message' => 'User Successfully Check-in');
+                    return array('status' => true,
+                        'message' => 'User Successfully Check-out',
+                        'Online' => $user_check,
+                        'last_checked_in' => $check_in,
+                        'last_checked_out' => $check_out
+                    );
                 }
 
 
@@ -612,10 +623,10 @@ class Staff
                     $timeSheet = $this->removeElementWithValue($timeSheet, $keysRemove);
 
                     //$name = $this->get_associative_value($timeSheet,'name');
-                    $timeSheets[] = ['user_id' => $value, 'user_name' => $name, 'timeSheet' => $timeSheet];
+                    $timeSheets[] = ['user_id' => $value, 'user_name' => $name, 'timeSheets' => $timeSheet];
                 }
                // $this->status_code = 20;
-                return array('status' => true, 'timeSheets' => $timeSheets);
+                return array('status' => true, 'users' => $timeSheets);
             }
             if ($_POST['filter_type'] == 'date') {
                 $datetime = new DateTime();
@@ -639,57 +650,11 @@ class Staff
                     $keysRemove = ['user_id', 'name'];
                     $timeSheet = $this->removeElementWithValue($timeSheet, $keysRemove);
 
-                    $timeSheets[] = ['user_id' => $value, 'user_name' => $name, 'timeSheet' => $timeSheet];
+                    $timeSheets[] = ['user_id' => $value, 'user_name' => $name, 'timeSheets' => $timeSheet];
                 }
                // $this->status_code = 20;
-                return array('status' => true, 'timeSheets' => $timeSheets);
+                return array('status' => true, 'users' => $timeSheets);
             }
-            $check_in = null;
-            $check_out = null;
-
-            if ($user_check) {
-                $check_in = date('Y-m-d H:i:s');
-            } else {
-                $check_out = date('Y-m-d H:i:s');
-            }
-
-            $user_check_data = [
-                'user_id' => $user_id,
-                'check_in' => $check_in,
-                'check_out' => $check_out,
-            ];
-            //check user already Check-in
-            $today_check_in = DB::query("SELECT * FROM user_check WHERE user_id = %i AND DATE(check_in) = CURDATE() ", $user_id);
-
-            if ($today_check_in) {
-                $today_check_in = _row_array($today_check_in);
-                if ($today_check_in['check_in'] && $user_check) {
-                   // $this->status_code = 400;
-                    return array('status' => false, 'message' => 'User Already Check-in');
-                }
-                if ($today_check_in['check_out']) {
-                  //  $this->status_code = 400;
-                    return array('status' => false, 'message' => 'User Already Check-out');
-                }
-
-                DB::update('user_check', array('check_out' => $check_out), "id=%i", $today_check_in['id']);
-               // $this->status_code = 201;
-                return array('status' => true, 'message' => 'User Successfully Check-out');
-
-            } else {
-                if ($check_out) {
-                   // $this->status_code = 400;
-                    return array('status' => false, 'message' => 'User Not Check-in');
-                }
-
-                $added = DB::insert('user_check', $user_check_data);
-                if ($added) {
-                  //  $this->status_code = 201;
-                    return array('status' => true, 'message' => 'User Successfully Check-in');
-                }
-
-            }
-
 
         }
         //$this->status_code = 503;
