@@ -2,10 +2,10 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
  
-include_once '../config/database.php';
+include_once '../config/Database.php';
 include_once '../models/RawStock.php';
-include_once '../models/staff.php';
-include_once '../models/api_key.php';
+include_once '../models/Staff.php';
+include_once '../models/Api_key.php';
 
 $staff = new Staff();
 $rawstock = new RawStock();
@@ -21,13 +21,13 @@ if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'){
 		$rawstock->is_admin = false;
 	}	
 	if($data = $rawstock->get()){
-		http_response_code($rawstock->status_code);
+		//http_response_code($rawstock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}
 			echo json_encode($data);exit;
 	}
 }else{
-	http_response_code(403);
+	//http_response_code(403);
 	echo json_encode(['status' => false , 'message' => "You have not Permission to Perform this action"]);exit;
 }

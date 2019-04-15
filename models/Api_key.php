@@ -23,7 +23,7 @@
 	public function generate_api_key()
     {
 		
-		require_once '../library/common.php';
+		require_once '../library/Common.php';
 		$common = new common();
         $length = 50;
         $t = 1;
@@ -49,6 +49,7 @@
             $token = $headers['authorization'];
         } elseif (isset($headers['Authorization'])) {
             $token = $headers['Authorization'];
+           // echo $token;
         } else {
             return;
         }
@@ -59,6 +60,7 @@
 			)
 		);
         if (!$result) {
+           // echo "hi ";
             return false;
         }
         $result = _row_array($result);

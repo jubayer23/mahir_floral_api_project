@@ -207,7 +207,7 @@ class Staff
                 $pass = hash('sha512', $user_info['salt'] . $_POST['password']);
                 if ($user_info['password'] == $pass) {
                     //$this->status_code = 200;
-                    require_once '../models/api_key.php';
+                    require_once '../models/Api_key.php';
                     $api_key = new Api_key();
                     $api_key = $api_key->set_api_key($user_info['id']);
                     //Update Login user Status
@@ -233,7 +233,9 @@ class Staff
         $validator = new Validator();
 
         $errors = [];
+        //$_POST = (array)json_decode(file_get_contents("php://input", true));
         $_POST = (array)json_decode(file_get_contents("php://input", true));
+
         if (isset($_POST['user_id']) && (trim($_POST['user_id']) != '')) {
             if ($validator->integer($_POST['user_id'])) {
                 //check shop exit
@@ -261,13 +263,21 @@ class Staff
             //$this->status_code = 200;
 
             $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $_POST['user_id']);
-            return array('status' => true,
-                'message' => null,
-                'Online' => $user_exist['is_online'],
-                'last_checked_in' => $user_checks_by_id[0]['check_in'],
-                'last_checked_out' => $user_checks_by_id[0]['check_out']
-            );
-
+            if ($user_checks_by_id) {
+                return array('status' => true,
+                    'message' => null,
+                    'Online' => $user_exist['is_online'],
+                    'last_checked_in' => $user_checks_by_id[0]['check_in'],
+                    'last_checked_out' => $user_checks_by_id[0]['check_out']
+                );
+            }else{
+                return array('status' => true,
+                    'message' => null,
+                    'Online' => $user_exist['is_online'],
+                    'last_checked_in' => null,
+                    'last_checked_out' => null
+                );
+            }
 
 
 

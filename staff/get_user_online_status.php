@@ -1,10 +1,11 @@
 <?php
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
  
-include_once '../config/database.php';
-include_once '../models/staff.php';
-include_once '../models/api_key.php';
+include_once '../config/Database.php';
+include_once '../models/Staff.php';
+include_once '../models/Api_key.php';
 
 $staff = new Staff();
 //$api_key = new Api_key();
