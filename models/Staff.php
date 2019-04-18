@@ -463,12 +463,20 @@ class Staff
             $is_online = $user_online_status['is_online'];
 
             if ($is_online == 1) {
+
+                //User is trying to check out in this section
+
                 if ($user_check) {
                     //$this->status_code = 400;
                     return array('status' => false, 'message' => 'User Already Check-in');
                 }
 
                 $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $user_id);
+
+
+                if(!$user_checks_by_id){
+                    return array('status' => false, 'message' => 'Database error: No row found!');
+                }
 
                 if ($user_checks_by_id[0]['check_out']) {
                     //$this->status_code = 400;
@@ -489,9 +497,27 @@ class Staff
 
             } else {
 
+                //user wants to check-in in this section
+
                 if (!$user_check) {
                    // $this->status_code = 400;
                     return array('status' => false, 'message' => 'User Already Check-out');
+                }
+                $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $user_id);
+
+                if($user_checks_by_id){
+                   // if( date('Y-m-d', $user_checks_by_id[0]['check_in']) == date('Y-m-d', $check_in)  ){
+                        $t1 = strtotime($check_in);
+                        $t2 = strtotime( $user_checks_by_id[0]['check_in']);
+
+                        if(date('d/m/y',$t1) == date('d/m/y',$t2)){
+                            return array('status' => false, 'message' => 'You already check-in check-out today. You cannot check-in two times in a day.');
+                        }
+                       // echo date('d/m/y',$t);
+                       // echo date('Y-m-d', $user_checks_by_id[0]['check_in']);
+                      //  echo date('Y-m-d', $check_in);
+                      //  return array('status' => false, 'message' => 'You already check-in check-out today. You cannot check-in two times in a day.');
+                    //}
                 }
 
                 $added = DB::insert('user_check', $user_check_data);

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "552af8fb-e709-416d-8d8a-bdc624178226",
+		"_postman_id": "360155b0-8ea9-42d1-b85e-640a7814d9d6",
 		"name": "Mahire Floral",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -103,23 +103,23 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"value": "Wfsu6gLyc9D4qxzvzTdhw7hKvzMx2pcxXrWnIQ9bwDN5HPcuBq",
 								"description": "Admin",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"month\":3,\n\t\"year\":2019,\n\t\"filter_by_shop_id\":1\n}"
+							"raw": "{\n\t\"month\":3,\n\t\"year\":2019,\n\t\"filter_by_shop_id\":2\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/shopstocker/get_sold_item.php",
+							"raw": "http://localhost/mahir_floral_api_project/shopstocker/get_sold_item.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"shopstocker",
 								"get_sold_item.php"
 							]
@@ -128,7 +128,7 @@
 					"response": []
 				},
 				{
-					"name": "Get Delivered Stocks",
+					"name": "Get Shop Stocks",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -146,7 +146,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
+								"value": "6c6lkgaK0X6lePlCx1y4SeUObJUmY1q4xwIRRz1YvDSUApi66K",
 								"description": "admin",
 								"type": "text"
 							},
@@ -160,16 +160,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"month\":3,\n\t\"year\":2019,\n\t\"filter_by_shop_id\": 2\n}\n"
+							"raw": "{\n\t\"month\":4,\n\t\"year\":2019,\n\t\"filter_by_shop_id\": 2\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/shopstocker/get_shop_stock.php",
+							"raw": "http://localhost/mahir_floral_api_project/shopstocker/get_shop_stock.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"shopstocker",
 								"get_shop_stock.php"
 							]
@@ -190,7 +190,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+								"value": "vuQ9YCXjjpr51v0GeQ28rGyNRdDn6iJT9ucimk2XCXYn1M3g0V"
 							},
 							{
 								"key": "Content-Type",
@@ -201,16 +201,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"month\":\"03\",\n\t\"year\":2019\n}\n"
+							"raw": "{\n\t\"month\":\"04\",\n\t\"year\":2019\n}\n"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/rawstocker/get_delivered_stock.php",
+							"raw": "http://localhost/mahir_floral_api_project/rawstocker/get_delivered_stock.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"rawstocker",
 								"get_delivered_stock.php"
 							]
@@ -219,14 +219,14 @@
 					"response": []
 				},
 				{
-					"name": "Raw Stock Entry",
+					"name": "Entry Raw Stock",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+								"value": "IpLdt5uMVWkTiJPdsC1BrOG4Me7uWq1mtRyHh5WWqtBoiMtaRv"
 							},
 							{
 								"key": "Content-Type",
@@ -237,16 +237,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"product_name\":\"Booking Shop\",\n\t\"quantity\":4,\n\t\"unit\":\"45\",\n\t\"color\": \"234\",\n\t\"comment\": \"<script>alert(test);</script>\"\n}"
+							"raw": "{\n\t\"product_name\":\"Rose\",\n\t\"quantity\":8,\n\t\"unit\":\"Pieces\",\n\t\"color\": \"Red\",\n\t\"comment\": \"No Comment at all\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/rawstocker/entry_raw_stock.php",
-							"protocol": "http",
+							"raw": "https://mahirfloralevents.com/mahir_floral_api_project/rawstocker/entry_raw_stock.php",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"mahirfloralevents",
+								"com"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"rawstocker",
 								"entry_raw_stock.php"
 							]
@@ -262,7 +263,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+								"value": "KFkaQwav24nviLKHlhHHt9lp0Bm9ZxTBkBBP00eQFF7gu8AQ8R"
 							},
 							{
 								"key": "Content-Type",
@@ -273,16 +274,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"shop_id\":\"1\",\n\t\"product_id\":1,\n\t\"quantity\":1,\n\t\"comment\": \"test\"\n}"
+							"raw": "{\n\t\"shop_id\":\"6\",\n\t\"product_id\":2,\n\t\"quantity\":2,\n\t\"comment\": \"test delivery\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/rawstocker/entry_deliver_product.php",
+							"raw": "http://localhost/mahir_floral_api_project/rawstocker/entry_deliver_product.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"rawstocker",
 								"entry_deliver_product.php"
 							]
@@ -309,28 +310,29 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH",
-								"type": "text",
-								"disabled": true
+								"value": "IpLdt5uMVWkTiJPdsC1BrOG4Me7uWq1mtRyHh5WWqtBoiMtaRv",
+								"type": "text"
 							},
 							{
 								"key": "",
 								"value": "jBUVO7Q9E5sCie6qGlKvamx5o2Aj23jLsFuJLkpTJVlHzjO3Yv",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n\t\"month\":3,\r\n\t\"year\":2019\r\n}\r\n"
+							"raw": "\r\n{\r\n\t\"month\":4,\r\n\t\"year\":2019\r\n}\r\n"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/rawstocker/get_raw_stock.php",
-							"protocol": "http",
+							"raw": "https://mahirfloralevents.com/mahir_floral_api_project/rawstocker/get_raw_stock.php",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"mahirfloralevents",
+								"com"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"rawstocker",
 								"get_raw_stock.php"
 							]
@@ -339,14 +341,14 @@
 					"response": []
 				},
 				{
-					"name": "Ready Stock Entry",
+					"name": "Entry Ready Stock",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+								"value": "KFkaQwav24nviLKHlhHHt9lp0Bm9ZxTBkBBP00eQFF7gu8AQ8R"
 							},
 							{
 								"key": "Content-Type",
@@ -357,16 +359,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"product_name\":\"Booking Shop\",\n\t\"quantity\":4,\n\t\"price\":12,\n\t\"unit\":\"45\",\n\t\"color\": \"234\",\n\t\"comment\": \"<script>alert(test);</script>\"\n}"
+							"raw": "{\n\t\"product_name\":\"Rose with Tulip\",\n\t\"quantity\":4,\n\t\"price\":120,\n\t\"unit\":\"Boxs\",\n\t\"color\": \"REd\",\n\t\"comment\": \"No comment for now\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/rawstocker/entry_ready_stock.php",
+							"raw": "http://localhost/mahir_floral_api_project/rawstocker/entry_ready_stock.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"rawstocker",
 								"entry_ready_stock.php"
 							]
@@ -375,14 +377,14 @@
 					"response": []
 				},
 				{
-					"name": "GET Ready Stock",
+					"name": "Get Ready Stock",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB"
+								"value": "KFkaQwav24nviLKHlhHHt9lp0Bm9ZxTBkBBP00eQFF7gu8AQ8R"
 							},
 							{
 								"key": "Content-Type",
@@ -406,16 +408,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"month\":\"03\",\n\t\"year\":2019\n}"
+							"raw": "{\n\t\"month\":\"04\",\n\t\"year\":2019\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/rawstocker/get_ready_stock.php",
+							"raw": "http://localhost/mahir_floral_api_project/rawstocker/get_ready_stock.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"rawstocker",
 								"get_ready_stock.php"
 							]
@@ -435,7 +437,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "WGavnGxMNFqtDZhJLHbF1mFBt3nVlcCKYZr0Se0E9hPYe6zEiZ",
+								"value": "eTxVlyzciGZqPE0wCFvuw7t1tNHRaQ2Q9jOUkY1BpZrVjOM1W0",
 								"description": "admin",
 								"type": "text"
 							},
@@ -448,18 +450,19 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"al11i@gmail.com\",\n    \"password\": \"testuedsr\",\n    \"name\": \"Ali\",\n    \"shop_id\":1,\n    \"role\": \"Raw Stock\"\n}"
+							"raw": "{\n\t\"email\": \"staff_raw03@gmail.com\",\n    \"password\": \"12345678\",\n    \"name\": \"Devid raw stocker\",\n    \"shop_id\":3,\n    \"role\": \"Raw Stock\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/staff/signup.php",
+							"raw": "http://mahirfloralevents.com/mahir_floral_api_project/admin/staff_registration.php",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"mahirfloralevents",
+								"com"
 							],
 							"path": [
-								"core-api",
-								"staff",
-								"signup.php"
+								"mahir_floral_api_project",
+								"admin",
+								"staff_registration.php"
 							]
 						}
 					},
@@ -479,18 +482,30 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\":\"zu0072010@gmail.com\",\n\t\"password\":\"testuser\"\n}"
+							"raw": "{\n\t\"email\":\"staff_raw@gmail.com\",\n\t\"password\":\"12345678\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/staff/login.php",
+							"raw": "http://localhost/mahir_floral_api_project/staff/Login.php?",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"staff",
-								"login.php"
+								"Login.php"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "staff_raw@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -498,11 +513,8 @@
 				},
 				{
 					"name": "User Info",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -512,9 +524,8 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "HLTLyTd79VvZyTY0lYdhITYEOccimQM2gKK2HtDSsR8KppWeYB",
-								"type": "text",
-								"disabled": true
+								"value": "ja2nZtcx2BFjDUDMCxh2KTH8pgBf22RI1RG33xmpjNiGN5e07c",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -522,13 +533,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost/core-api/staff/get_user_info.php",
+							"raw": "http://localhost/mahir_floral_api_project/staff/get_user_info.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"staff",
 								"get_user_info.php"
 							]
@@ -549,7 +560,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "WGavnGxMNFqtDZhJLHbF1mFBt3nVlcCKYZr0Se0E9hPYe6zEiZ"
+								"value": "w2WwEDpZD2MGsewvEO7UdroSPCTc0PZHAswROk8tvMgAYpD0Y3"
 							},
 							{
 								"key": "Content-Type",
@@ -560,16 +571,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"shop_name\":\"Booking Shop\",\n\t\"location\":\"axyz\",\n\t\"latitude\":\"45\",\n\t\"longitude\": \"234\"\n}"
+							"raw": "{\n\t\"shop_name\":\"HQ\",\n\t\"location\":\"ariston newyork, 1992\",\n\t\"latitude\":\"24.28181\",\n\t\"longitude\": \"91.33411\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost/core-api/admin/shop_registration.php",
+							"raw": "http://localhost/mahir_floral_api_project/admin/shop_registration.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
+								"mahir_floral_api_project",
 								"admin",
 								"shop_registration.php"
 							]
@@ -588,7 +599,7 @@
 							{
 								"key": "Authorization",
 								"type": "text",
-								"value": "xF2i9czSgSm6xjD6Y15tH9mXNy9YNJc4a5r1VruxstYcvWzJgH"
+								"value": "mEs9HIQRhcDq9336LlXDaE8sQaw1IPMCO01UKWtrLzpeZ8nTNf"
 							},
 							{
 								"key": "Content-Type",
@@ -602,14 +613,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost/core-api/shop/getshops.php",
+							"raw": "http://localhost/mahir_floral_api_project/admin/getshops.php",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"core-api",
-								"shop",
+								"mahir_floral_api_project",
+								"admin",
 								"getshops.php"
 							]
 						}
@@ -622,21 +633,35 @@
 			"name": "User Online Status",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"user_id\":1\n}"
+					"raw": "{\n\t\"user_id\":4\n}"
 				},
 				"url": {
-					"raw": "http://localhost/core-api/staff/get_user_online_status.php",
-					"protocol": "http",
+					"raw": "https://mahirfloralevents.com/mahir_floral_api_project/staff/get_user_online_status.php",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"mahirfloralevents",
+						"com"
 					],
 					"path": [
-						"core-api",
+						"mahir_floral_api_project",
 						"staff",
 						"get_user_online_status.php"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "4",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -728,16 +753,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"user_id\":8,\n\t\"user_check\": 0\n}"
+					"raw": "{\n\t\"user_id\": \"4\",\n\t\"user_check\": \"0\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost/core-api/staff/user_check.php",
+					"raw": "http://localhost/mahir_floral_api_project/staff/user_check.php",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"path": [
-						"core-api",
+						"mahir_floral_api_project",
 						"staff",
 						"user_check.php"
 					]
@@ -759,16 +784,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"filter_type\":\"week\",\n\t\"week_num\": \"12\",\n\t\"year\": 2019\n}"
+					"raw": "{\n\t\"filter_type\":\"week\",\n\t\"week_num\": \"15\",\n\t\"year\": 2019\n}"
 				},
 				"url": {
-					"raw": "http://localhost/core-api/staff/timesheet.php",
+					"raw": "http://mahirfloralevents.com/mahir_floral_api_project/staff/timesheet.php",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"mahirfloralevents",
+						"com"
 					],
 					"path": [
-						"core-api",
+						"mahir_floral_api_project",
 						"staff",
 						"timesheet.php"
 					]

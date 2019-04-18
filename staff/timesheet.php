@@ -7,9 +7,11 @@ include_once '../models/Staff.php';
 include_once '../models/Api_key.php';
 
 $staff = new Staff();
-//$api_key = new Api_key();
-//$user = $api_key->validate_api_key();
-//if($staff->check_role() == 'Admin'){
+$api_key = new Api_key();
+$user = $api_key->validate_api_key();
+$staff->id = $user;
+if($staff->check_role() == 'Admin'){
+
 	if($data = $staff->timesheet()){
 		http_response_code($staff->status_code);
 		if($data['status'] == false){
@@ -17,4 +19,7 @@ $staff = new Staff();
 		}
 			echo json_encode($data);exit;
 	}
-//}
+}else{
+    //http_response_code(403);
+    echo json_encode(['status' => false , 'message' => "You have not Permission to Perform this action"]);exit;
+}

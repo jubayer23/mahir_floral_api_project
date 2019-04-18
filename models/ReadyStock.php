@@ -142,20 +142,16 @@
 			return ['status' => false , 'message'  => $message , 'errors'  => $errors];
 
 		}else{
-			if(!$this->is_admin){
-				//secho "SELECT id, product_name as name , quantity,price, unit, DATE_FORMAT(date(date), '%d/%m/%Y') as received_date, color, comment FROM $this->table WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']." AND added_by = ".$this->added_by;die;
-				$ready_stock = DB::query("SELECT id, product_name as name , quantity,price, unit, DATE_FORMAT(date(date), '%d/%m/%Y') as received_date, color, comment FROM $this->table WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']." AND added_by = ".$this->added_by);//
 
-			}else{
-				$ready_stock = DB::query("SELECT id, product_name as name , quantity,price, unit, DATE_FORMAT(date(date), '%d/%m/%Y') as received_date, color, comment FROM $this->table WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']);//
-			}
+            $ready_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity,R.price, R.unit, DATE_FORMAT(date(R.date), '%d/%m/%Y') as received_date, R.color, R.comment, U.name as added_by FROM `ready_stock` R JOIN `users` U ON U.id = R.added_by WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']);//
+
 
 			if($ready_stock){
 				$this->status_code = 200;
-				return array('status' => true,'readyStock' => $ready_stock);
+				return array('status' => true,'readyStocks' => $ready_stock);
 			}else{
 				$this->status_code = 200;
-				return array('status' => true,'readyStock' => []);
+				return array('status' => true,'readyStocks' => []);
 			}
 		
 		}
