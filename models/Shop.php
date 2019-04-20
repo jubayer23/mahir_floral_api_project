@@ -87,6 +87,7 @@
 				$this->status_code = 200;
 				return array('status' => true,'shops' => $shops);
 			}
+		
 	}
 	public function update()
     {

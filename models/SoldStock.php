@@ -28,6 +28,7 @@
 				$shop_exist = DB::query("SELECT * FROM shop_stock WHERE id = %i ",$_POST['shop_stock_id']);
 				
 				if(!$shop_exist){
+					$message = "Shop stock item does not exist";
 					$errors['shop_stock_id'] = "Shop Stock not exist";
 				}else{
 					$shop_exist = _row_array($shop_exist);
@@ -48,7 +49,8 @@
 
 				$shop_stock = DB::query("SELECT * FROM shop_stock WHERE id = %i AND quantity >= %i ",$_POST['shop_stock_id'],$_POST['quantity']);
 				if(!$shop_stock){
-					$errors['shop_stock_id'] = "Shop Stock not exist";
+					$message = "Quantity exceed. You cannot sell more then existed quantity!";
+					$errors['shop_stock_id'] = "Quantity exceed. You cannot sell more then existed quantity!";
 				}else{
 					$shop_stock = _row_array($shop_stock);
 					$quantity=$_POST['quantity'];
@@ -78,6 +80,7 @@
 
 			$sold_data = [
 				'product_id' => $shop_stock['product_id'],
+				'shop_stock_id' => $_POST['shop_stock_id'],
 				'quantity' => $quantity,
 				'comment' => html_escape($comment),
 				'sell_date' => date('Y-m-d H:i:s'),
@@ -111,7 +114,7 @@
 				
 				//$shop_exist = DB::query("SELECT * FROM shop WHERE id = %i ",$_POST['filter_by_shop_id']);
 				//var_dump($shop_stock['shop_id'],$this->seller_by);die;
-				if(!$this->is_admin){
+				/*if(!$this->is_admin){
 					$is_shop_owner = DB::query("SELECT * FROM user_shop WHERE shop_id = %i AND user_id = %i ",$_POST['filter_by_shop_id'],$this->seller_by);
 					if(!$is_shop_owner){
 					$errors['filter_by_shop_id'] = "Only Owner Can Request";
@@ -122,7 +125,7 @@
 				}else{
 					$is_shop_owner = DB::query("SELECT * FROM user_shop WHERE shop_id = %i AND user_id = %i ",$_POST['filter_by_shop_id'],$this->seller_by);
 				
-				}
+				}*/
 				
 				
 			}else{
@@ -173,6 +176,8 @@
 			if($soldStocks ){
 				$this->status_code = 200;
 				return array('status' => true,'soldStocks' => $soldStocks);
+			}else{
+				return array('status' => false,'soldStocks' => $soldStocks);
 			}
 			
 		}

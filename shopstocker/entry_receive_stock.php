@@ -16,14 +16,14 @@ $staff->id = $user;
 $shopstock->received_by =   $user;
 
 if($staff->check_role() == 'Shop Stock'){
-	if($data = $shopstock->receiverd()){
-		http_response_code($shopstock->status_code);
+	if($data = $shopstock->entry_receive_stock()){
+		//http_response_code($shopstock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}
 			echo json_encode($data);exit;
 	}
 }else{
-	http_response_code(403);
+	//http_response_code(403);
 	echo json_encode(['status' => false , 'message' => "You have not Permission to Perform this action"]);exit;
 }
