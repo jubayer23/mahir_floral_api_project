@@ -119,4 +119,58 @@ class DemandStock
 
 
     }
+
+
+    public function completeDemand()
+    {
+        //product_name, price, quantity, unit, date, color, comment, user_id
+        $validator = new Validator();
+        $errors = [];
+        $message = null;
+        $_POST = (array)json_decode(file_get_contents("php://input", true));
+
+        if (isset($_POST['demand_id']) && (trim($_POST['demand_id']) != '')) {
+            if ($validator->integer($_POST['demand_id'])) {
+
+                $shop_exist = DB::query("SELECT * FROM on_demand WHERE id = %i", $_POST['demand_id']);
+                $shop_exist = _row_array($shop_exist);
+                if (!$shop_exist) {
+                    $errors['demand_id'] = "Shop not exist";
+                } else {
+                    $shop_id = $_POST['demand_id'];
+                }
+
+            } else {
+                $errors['demand_id'] = "Shop Require Integer";
+            }
+        } else {
+            $message = 'Required field missing';
+            $errors['demand_id'] = "Shop Is Require";
+        }
+
+
+
+
+        if (!empty($errors)) {
+            $this->status_code = 400;
+            return ['status' => false, 'message' => $message, 'errors' => $errors];
+
+        } else {
+
+
+            //quantity subtract from ready stock
+            //add in shop_stock
+            //delivery_status 0
+            $delete_query = DB::query("SELECT  FROM on_demand WHERE id = %i", $_POST['demand_id']);
+            //when shop stock user received
+            if($delete_query){
+                return array('status' => true,  'message' => 'Demand successful');
+            }else{
+                return array('status' => true,  'message' => 'Demand successful');
+            }
+
+        }
+
+
+    }
 }
