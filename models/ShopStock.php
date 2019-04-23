@@ -252,7 +252,7 @@
                 $this->status_code = 400;
                 $message = "no data";
                 $shopStocks = [];
-                return ['status' => false ,  'shopStocks'  => $shopStocks];
+                return ['status' => true ,  'shopStocks'  => $shopStocks];
             }
 		
 		}
