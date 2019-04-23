@@ -21,7 +21,7 @@ if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'  || $s
 		$readystock->is_admin = false;
 	}
 	
-	if($data = $readystock->get()){
+	if($data = $readystock->getReadyStockForDemand()){
 		http_response_code($readystock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
