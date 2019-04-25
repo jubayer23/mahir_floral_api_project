@@ -177,7 +177,7 @@
 				$this->status_code = 200;
 				return array('status' => true,'soldStocks' => $soldStocks);
 			}else{
-				return array('status' => false,'soldStocks' => $soldStocks);
+				return array('status' => true,'soldStocks' => $soldStocks);
 			}
 			
 		}
