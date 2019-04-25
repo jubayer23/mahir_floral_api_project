@@ -161,12 +161,73 @@ class DemandStock
             //quantity subtract from ready stock
             //add in shop_stock
             //delivery_status 0
-            $delete_query = DB::query("SELECT  FROM on_demand WHERE id = %i", $_POST['demand_id']);
+            $delete_query = DB::query("DELETE FROM on_demand WHERE id = %i", $_POST['demand_id']);
             //when shop stock user received
             if($delete_query){
                 return array('status' => true,  'message' => 'Demand successful');
             }else{
                 return array('status' => true,  'message' => 'Demand successful');
+            }
+
+        }
+
+
+    }
+
+
+
+    public function getDemandedStocks()
+    {
+        //product_name, price, quantity, unit, date, color, comment, user_id
+        $validator = new Validator();
+        $errors = [];
+        $message = null;
+        $_POST = (array)json_decode(file_get_contents("php://input", true));
+
+        if (isset($_POST['shop_id']) && (trim($_POST['shop_id']) != '')) {
+            if ($_POST['shop_id'] > 0) {
+
+                $shop_exist = DB::query("SELECT * FROM shop WHERE id = %i", $_POST['shop_id']);
+                $shop_exist = _row_array($shop_exist);
+                if (!$shop_exist) {
+                    $errors['shop_id'] = "Shop not exist";
+                } else {
+                    $shop_id = $_POST['shop_id'];
+                }
+
+            } else {
+                $shop_id = $_POST['shop_id'];
+            }
+        } else {
+            $message = 'Required field missing';
+            $errors['demand_id'] = "Shop Is Require";
+        }
+
+
+
+
+        if (!empty($errors)) {
+            $this->status_code = 400;
+            return ['status' => false, 'message' => $message, 'errors' => $errors];
+
+        } else {
+
+
+
+            if($shop_id == 0){
+                $demanded_stocks = DB::query("SELECT D.id, R.product_name, R.unit, R.color, D.demanded_quantity, D.priority, D.demanded_date, S.name as demanded_shop_name 
+                FROM ready_stock R JOIN on_demand D ON R.id = D.product_id JOIN shop S ON S.id = D.demanded_shop");
+            }else{
+                $demanded_stocks = DB::query("SELECT D.id, R.product_name, R.unit, R.color, D.demanded_quantity, D.priority, D.demanded_date, S.name as demanded_shop_name 
+                FROM ready_stock R JOIN on_demand D ON R.id = D.product_id JOIN shop S ON S.id = D.demanded_shop WHERE D.demanded_shop = %i", $shop_id);
+            }
+
+            if ($demanded_stocks) {
+                //$this->status_code = 200;
+                return array('status' => true, 'demandedStocks' => $demanded_stocks);
+            } else {
+                //$this->status_code = 200;
+                return array('status' => true, 'demandedStocks' => []);
             }
 
         }

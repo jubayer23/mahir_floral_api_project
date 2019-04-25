@@ -206,25 +206,37 @@ class ReadyStock
 
             $ready_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity,R.price, R.unit, DATE_FORMAT(date(R.date), '%d/%m/%Y') as received_date, R.color, R.comment, U.name as added_by FROM `ready_stock` R JOIN `users` U ON U.id = R.added_by WHERE  YEAR(date) = " . $_POST['year'] . "  AND MONTH(date) = " . $_POST['month']);//
 
-            $ids = array_unique(array_column($ready_stock, 'id'));
-            foreach ($ids as $value) {
 
-                echo $value;
+            /*echo '<pre>';
+            var_dump($ready_stock);
+             echo '</pre>';*/
+
+            foreach ($ready_stock as $kbc) {
+                foreach ($kbc as $abc) {
+                    echo $kbc['id'];
+                }
             }
 
-            while ($row=mysqli_fetch_row($ready_stock))
-            {
-                printf ("%s (%s)\n",$row[0],$row[1]);
-            }
+            /* $ids = array_unique(array_column($ready_stock, 'id'));
+             foreach ($ids as $value) {
+
+                 echo $value;
+             }
 
 
-            if ($ready_stock) {
-                $this->status_code = 200;
-                return array('status' => true, 'readyStocks' => $ready_stock);
-            } else {
-                $this->status_code = 200;
-                return array('status' => true, 'readyStocks' => []);
-            }
+             while ($row=mysqli_fetch_row($ready_stock))
+             {
+                 printf ("%s (%s)\n",$row[0],$row[1]);
+             }
+
+
+             if ($ready_stock) {
+                 $this->status_code = 200;
+                 return array('status' => true, 'readyStocks' => $ready_stock);
+             } else {
+                 $this->status_code = 200;
+                 return array('status' => true, 'readyStocks' => []);
+             }*/
 
         }
 
