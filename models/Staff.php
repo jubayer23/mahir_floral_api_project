@@ -118,6 +118,18 @@ class Staff
                     'shop_id' => $shop_id,
                 ];
                 DB::insert('user_shop', $user_shop);
+
+
+                $to      = $email;
+                $subject = 'Mahir Floral Management App: Registration successful';
+                $message = 'You have been registered with the Mahir Floral Management App. Please use following credentials for login.
+                 email =' + $email + ' password=' + $password;
+                $headers = 'From: tasmin@mahirfloralevents.com' . "\r\n" .
+                    'Reply-To: tasmin@mahirfloralevents.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+
+                mail($to, $subject, $message, $headers);
+
                 echo json_encode(['status' => true, 'message' => 'Successfully Registration', 'user_id' => $user_id]);
                 exit;
                 return ['status' => true, 'message' => 'Successfully Login', 'access_token' => $api_key];
@@ -526,7 +538,7 @@ class Staff
                    // $this->status_code = 201;
                    // return array('status' => true, 'message' => 'User Successfully Check-in');
                     return array('status' => true,
-                        'message' => 'User Successfully Check-out',
+                        'message' => 'User Successfully Check in',
                         'Online' => $user_check,
                         'last_checked_in' => $check_in,
                         'last_checked_out' => $check_out

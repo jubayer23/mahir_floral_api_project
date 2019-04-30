@@ -11,7 +11,7 @@ $staff = new Staff();
 //$user = $api_key->validate_api_key();
 //if($staff->check_role() == 'Admin'){
 	if($data = $staff->user_check()){
-		http_response_code($staff->status_code);
+		//http_response_code($staff->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}

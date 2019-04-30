@@ -16,13 +16,13 @@ $staff->id = $user;
 
 if($staff->check_role() == 'Admin'){
 	if($data = $shop->add()){
-		http_response_code($shop->status_code);
+		//http_response_code($shop->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}
 			echo json_encode($data);exit;
 	}
 }else{
-	http_response_code(403);
+	//http_response_code(403);
 	echo json_encode(['status' => false , 'message' => "You have not Permission to Perform this action"]);exit;
 }

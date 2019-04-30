@@ -19,20 +19,20 @@ if($staff->check_role() == 'Admin'){
 	if($data = $staff->signup()){
 		
 		if($data['status'] == false){
-			http_response_code(400);
+			//http_response_code(400);
 			echo json_encode( $data);exit;
 		}
-		http_response_code(201);
+		//http_response_code(201);
 		echo json_encode( $data);exit;
 
 		//echo json_encode(['response' =>['status' => true,'message' => 'Successfully Registration']]);exit;
 	}else{
-		http_response_code(503);
-		echo json_encode(['status' => false,"message" => "Unable To Signup Please Try Later"]);exit;
+		//http_response_code(503);
+		echo json_encode(['status' => false,"message" => "Unable to signup please try again later"]);exit;
 	}
 }else{
-	http_response_code(403);
-	echo json_encode(['status' => false,"message" => "You have not Permission to Perform this action"]);exit;
+	//http_response_code(403);
+	echo json_encode(['status' => false,"message" => "You do not have the permission to perform this action!"]);exit;
 }
 
 
