@@ -124,7 +124,9 @@ class RawStock
            // echo "hi";
             //echo $this->added_by;
 
-            $raw_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity, R.unit, DATE_FORMAT(date(R.received_date), '%d/%m/%Y') as received_date, R.color, R.comment , U.name as received_by FROM `raw_stock` R JOIN `users` U ON U.id = R.added_by  WHERE  YEAR(received_date) =  " . $_POST['year'] . " AND MONTH(received_date) = " . $_POST['month']);
+            //$raw_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity, R.unit, DATE_FORMAT(date(R.received_date), '%d/%m/%Y') as received_date, R.color, R.comment , U.name as received_by FROM `raw_stock` R JOIN `users` U ON U.id = R.added_by  WHERE  YEAR(received_date) =  " . $_POST['year'] . " AND MONTH(received_date) = " . $_POST['month']);
+
+            $raw_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity, R.unit, R.received_date as received_date, R.color, R.comment , U.name as received_by FROM `raw_stock` R JOIN `users` U ON U.id = R.added_by  WHERE  YEAR(received_date) =  " . $_POST['year'] . " AND MONTH(received_date) = " . $_POST['month']);
 
             if ($raw_stock) {
                 //$this->status_code = 200;

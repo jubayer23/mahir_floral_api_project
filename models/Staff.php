@@ -24,6 +24,8 @@ class Staff
         $message = null;
         $_POST = (array)json_decode(file_get_contents("php://input", true));
 
+        
+
         if (isset($_POST['name']) && (trim($_POST['name']) != '')) {
             $name = $_POST['name'];
         } else {
@@ -120,12 +122,12 @@ class Staff
                 DB::insert('user_shop', $user_shop);
 
 
-                $to      = $email;
+                $to = $email;
                 $subject = 'Mahir Floral Management App: Registration successful';
                 $message = 'You have been registered with the Mahir Floral Management App. Please use following credentials for login.
                  email =' + $email + ' password=' + $password;
-                $headers = 'From: tasmin@mahirfloralevents.com' . "\r\n" .
-                    'Reply-To: tasmin@mahirfloralevents.com' . "\r\n" .
+                $headers = 'From: tasmina@mahirfloralevents.com' . "\r\n" .
+                    'Reply-To: tasmina@mahirfloralevents.com' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
 
                 mail($to, $subject, $message, $headers);
@@ -260,7 +262,6 @@ class Staff
                 }
 
 
-
             } else {
                 $errors['user_id'] = "User Is Integer";
             }
@@ -269,7 +270,7 @@ class Staff
             $errors['user_id'] = "user is Require";
         }
         if (!empty($errors)) {
-           // $this->status_code = 400;
+            // $this->status_code = 400;
             return ['status' => false, 'message' => 'INVALID', 'errors' => $errors];
         } else {
             //$this->status_code = 200;
@@ -282,7 +283,7 @@ class Staff
                     'last_checked_in' => $user_checks_by_id[0]['check_in'],
                     'last_checked_out' => $user_checks_by_id[0]['check_out']
                 );
-            }else{
+            } else {
                 return array('status' => true,
                     'message' => null,
                     'Online' => $user_exist['is_online'],
@@ -292,110 +293,108 @@ class Staff
             }
 
 
-
-
         }
         //$this->status_code = 503;
         return ['status' => false, "message" => "Please Try Later"];
     }
 
-  /*  public function user_check()
-    {
+    /*  public function user_check()
+      {
 
-        require_once '../library/Validator.php';
-        $validator = new Validator();
+          require_once '../library/Validator.php';
+          $validator = new Validator();
 
-        $errors = [];
-        $_POST = (array)json_decode(file_get_contents("php://input", true));
-        if (isset($_POST['user_id']) && (trim($_POST['user_id']) != '')) {
-            if ($validator->integer($_POST['user_id'])) {
-                //check shop exit
-                $user_exist = DB::query("SELECT * FROM users WHERE id = %i", $_POST['user_id']);
-                $user_exist = _row_array($user_exist);
-                if (!$user_exist) {
-                    $errors['user_id'] = "User not exist";
-                } else {
-                    $user_id = $_POST['user_id'];
-                }
-            } else {
-                $errors['user_id'] = "User Is Integer";
-            }
+          $errors = [];
+          $_POST = (array)json_decode(file_get_contents("php://input", true));
+          if (isset($_POST['user_id']) && (trim($_POST['user_id']) != '')) {
+              if ($validator->integer($_POST['user_id'])) {
+                  //check shop exit
+                  $user_exist = DB::query("SELECT * FROM users WHERE id = %i", $_POST['user_id']);
+                  $user_exist = _row_array($user_exist);
+                  if (!$user_exist) {
+                      $errors['user_id'] = "User not exist";
+                  } else {
+                      $user_id = $_POST['user_id'];
+                  }
+              } else {
+                  $errors['user_id'] = "User Is Integer";
+              }
 
-        } else {
-            $errors['user_id'] = "user is Require";
-        }
-        if (isset($_POST['user_check']) && (trim($_POST['user_check']) != '')) {
-            if ($validator->integer($_POST['user_check'])) {
-                $user_check = $_POST['user_check'];
-            } else {
-                $errors['user_check'] = "user_check is Integer";
-            }
+          } else {
+              $errors['user_id'] = "user is Require";
+          }
+          if (isset($_POST['user_check']) && (trim($_POST['user_check']) != '')) {
+              if ($validator->integer($_POST['user_check'])) {
+                  $user_check = $_POST['user_check'];
+              } else {
+                  $errors['user_check'] = "user_check is Integer";
+              }
 
-            if ($validator->regex_match($user_check, '/^[0-1]*$/')) {
-                true;
-            } else {
-                $errors['user_check'] = "Invalid Value";
-            }
+              if ($validator->regex_match($user_check, '/^[0-1]*$/')) {
+                  true;
+              } else {
+                  $errors['user_check'] = "Invalid Value";
+              }
 
-        } else {
-            $errors['user_check'] = "user_check is Require";
-        }
+          } else {
+              $errors['user_check'] = "user_check is Require";
+          }
 
-        if (!empty($errors)) {
-            $this->status_code = 400;
-            return ['status' => false, 'message' => 'INVALID', 'errors' => $errors];
-        } else {
-            //date('Y-m-d H:i:s')
-            $check_in = null;
-            $check_out = null;
+          if (!empty($errors)) {
+              $this->status_code = 400;
+              return ['status' => false, 'message' => 'INVALID', 'errors' => $errors];
+          } else {
+              //date('Y-m-d H:i:s')
+              $check_in = null;
+              $check_out = null;
 
-            if ($user_check) {
-                $check_in = date('Y-m-d H:i:s');
-            } else {
-                $check_out = date('Y-m-d H:i:s');
-            }
+              if ($user_check) {
+                  $check_in = date('Y-m-d H:i:s');
+              } else {
+                  $check_out = date('Y-m-d H:i:s');
+              }
 
-            $user_check_data = [
-                'user_id' => $user_id,
-                'check_in' => $check_in,
-                'check_out' => $check_out,
-            ];
-            //check user already Check-in
-            $today_check_in = DB::query("SELECT * FROM user_check WHERE user_id = %i AND DATE(check_in) = CURDATE() ", $user_id);
+              $user_check_data = [
+                  'user_id' => $user_id,
+                  'check_in' => $check_in,
+                  'check_out' => $check_out,
+              ];
+              //check user already Check-in
+              $today_check_in = DB::query("SELECT * FROM user_check WHERE user_id = %i AND DATE(check_in) = CURDATE() ", $user_id);
 
-            if ($today_check_in) {
-                $today_check_in = _row_array($today_check_in);
-                if ($today_check_in['check_in'] && $user_check) {
-                    $this->status_code = 400;
-                    return array('status' => false, 'message' => 'User Already Check-in');
-                }
-                if ($today_check_in['check_out']) {
-                    $this->status_code = 400;
-                    return array('status' => false, 'message' => 'User Already Check-out');
-                }
+              if ($today_check_in) {
+                  $today_check_in = _row_array($today_check_in);
+                  if ($today_check_in['check_in'] && $user_check) {
+                      $this->status_code = 400;
+                      return array('status' => false, 'message' => 'User Already Check-in');
+                  }
+                  if ($today_check_in['check_out']) {
+                      $this->status_code = 400;
+                      return array('status' => false, 'message' => 'User Already Check-out');
+                  }
 
-                DB::update('user_check', array('check_out' => $check_out), "id=%i", $today_check_in['id']);
-                $this->status_code = 201;
-                return array('status' => true, 'message' => 'User Successfully Check-out');
+                  DB::update('user_check', array('check_out' => $check_out), "id=%i", $today_check_in['id']);
+                  $this->status_code = 201;
+                  return array('status' => true, 'message' => 'User Successfully Check-out');
 
-            } else {
-                if ($check_out) {
-                    $this->status_code = 400;
-                    return array('status' => false, 'message' => 'User Not Check-in');
-                }
-                $added = DB::insert('user_check', $user_check_data);
-                if ($added) {
-                    $this->status_code = 201;
-                    return array('status' => true, 'message' => 'User Successfully Check-in');
-                }
+              } else {
+                  if ($check_out) {
+                      $this->status_code = 400;
+                      return array('status' => false, 'message' => 'User Not Check-in');
+                  }
+                  $added = DB::insert('user_check', $user_check_data);
+                  if ($added) {
+                      $this->status_code = 201;
+                      return array('status' => true, 'message' => 'User Successfully Check-in');
+                  }
 
-            }
+              }
 
 
-        }
-        $this->status_code = 503;
-        return ['status' => false, "message" => "Please Try Later"];
-    }*/
+          }
+          $this->status_code = 503;
+          return ['status' => false, "message" => "Please Try Later"];
+      }*/
 
 
     public function user_check()
@@ -486,7 +485,7 @@ class Staff
                 $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $user_id);
 
 
-                if(!$user_checks_by_id){
+                if (!$user_checks_by_id) {
                     return array('status' => false, 'message' => 'Database error: No row found!');
                 }
 
@@ -504,7 +503,7 @@ class Staff
                     'Online' => $user_check,
                     'last_checked_in' => $user_checks_by_id[0]['check_in'],
                     'last_checked_out' => $check_out
-                    );
+                );
 
 
             } else {
@@ -512,31 +511,31 @@ class Staff
                 //user wants to check-in in this section
 
                 if (!$user_check) {
-                   // $this->status_code = 400;
+                    // $this->status_code = 400;
                     return array('status' => false, 'message' => 'User Already Check-out');
                 }
                 $user_checks_by_id = DB::query("SELECT * FROM user_check WHERE user_id = %i order by id desc limit 1", $user_id);
 
-                if($user_checks_by_id){
-                   // if( date('Y-m-d', $user_checks_by_id[0]['check_in']) == date('Y-m-d', $check_in)  ){
-                        $t1 = strtotime($check_in);
-                        $t2 = strtotime( $user_checks_by_id[0]['check_in']);
+                if ($user_checks_by_id) {
+                    // if( date('Y-m-d', $user_checks_by_id[0]['check_in']) == date('Y-m-d', $check_in)  ){
+                    $t1 = strtotime($check_in);
+                    $t2 = strtotime($user_checks_by_id[0]['check_in']);
 
-                        if(date('d/m/y',$t1) == date('d/m/y',$t2)){
-                            return array('status' => false, 'message' => 'You already check-in check-out today. You cannot check-in two times in a day.');
-                        }
-                       // echo date('d/m/y',$t);
-                       // echo date('Y-m-d', $user_checks_by_id[0]['check_in']);
-                      //  echo date('Y-m-d', $check_in);
-                      //  return array('status' => false, 'message' => 'You already check-in check-out today. You cannot check-in two times in a day.');
+                    if (date('d/m/y', $t1) == date('d/m/y', $t2)) {
+                        return array('status' => false, 'message' => 'You already check-in check-out today. You cannot check-in two times in a day.');
+                    }
+                    // echo date('d/m/y',$t);
+                    // echo date('Y-m-d', $user_checks_by_id[0]['check_in']);
+                    //  echo date('Y-m-d', $check_in);
+                    //  return array('status' => false, 'message' => 'You already check-in check-out today. You cannot check-in two times in a day.');
                     //}
                 }
 
                 $added = DB::insert('user_check', $user_check_data);
                 if ($added) {
                     DB::update('users', array('is_online' => $user_check), "id=%i", $user_id);
-                   // $this->status_code = 201;
-                   // return array('status' => true, 'message' => 'User Successfully Check-in');
+                    // $this->status_code = 201;
+                    // return array('status' => true, 'message' => 'User Successfully Check-in');
                     return array('status' => true,
                         'message' => 'User Successfully Check in',
                         'Online' => $user_check,
@@ -550,7 +549,7 @@ class Staff
 
 
         } else {
-           // $this->status_code = 201;
+            // $this->status_code = 201;
             return array('status' => false, 'message' => 'Database error');
         }
     }
@@ -643,7 +642,7 @@ class Staff
 
 
         if (!empty($errors)) {
-           // $this->status_code = 400;
+            // $this->status_code = 400;
             return ['status' => false, 'message' => 'INVALID', 'errors' => $errors];
         } else {
 
@@ -673,7 +672,7 @@ class Staff
                     //$name = $this->get_associative_value($timeSheet,'name');
                     $timeSheets[] = ['user_id' => $value, 'user_name' => $name, 'timeSheets' => $timeSheet];
                 }
-               // $this->status_code = 20;
+                // $this->status_code = 20;
                 return array('status' => true, 'users' => $timeSheets);
             }
             if ($_POST['filter_type'] == 'date') {
@@ -700,7 +699,7 @@ class Staff
 
                     $timeSheets[] = ['user_id' => $value, 'user_name' => $name, 'timeSheets' => $timeSheet];
                 }
-               // $this->status_code = 20;
+                // $this->status_code = 20;
                 return array('status' => true, 'users' => $timeSheets);
             }
 
