@@ -17,5 +17,5 @@ if($data = $staff->signin()){
 		echo json_encode($data);exit;
 	}else{
 		http_response_code(503);
-		echo json_encode(['status' => false,"message" => "Unable To Signup Please Try Later"]);exit;
+		echo json_encode(['status' => false,"message" => "Unable To Signup Please try again later!"]);exit;
 	}

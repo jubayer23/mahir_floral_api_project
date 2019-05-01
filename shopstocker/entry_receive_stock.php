@@ -25,5 +25,5 @@ if($staff->check_role() == 'Shop Stock'){
 	}
 }else{
 	//http_response_code(403);
-	echo json_encode(['status' => false , 'message' => "You have not Permission to Perform this action"]);exit;
+	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
 }

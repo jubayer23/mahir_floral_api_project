@@ -33,6 +33,6 @@ if($data = $staff->user_info()){
 }
 }else{
 	//http_response_code(200);
-	echo json_encode(['status' => false , 'message' => "You have not Permission to Perform this action"]);exit;
+	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
 }
 
