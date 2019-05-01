@@ -84,7 +84,7 @@ class Staff
 
         if (isset($_POST['role']) && (trim($_POST['role']) != '')) {
             $role = $_POST['role'];
-            if ($validator->in_list($_POST['role'], ['Raw Stock', 'Shop Stock'])) {
+            if ($validator->in_list($_POST['role'], ['Raw Stock', 'Shop Stock', 'Distributor', 'Admin'])) {
                 $role = $_POST['role'];
             } else {
                 $errors['role'] = "Invalid Role";
