@@ -13,7 +13,7 @@ $api_key = new Api_key();
 
 $user = $api_key->validate_api_key();
 $readystock->added_by = $staff->id = $user;
-if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'  || $staff->check_role() == 'Shop Stock'){
+if($staff->check_role() == 'Admin'  || $staff->check_role() == 'Shop Stock'){
 	
 	if($staff->check_role() == 'Admin'){
 		$readystock->is_admin = true;
