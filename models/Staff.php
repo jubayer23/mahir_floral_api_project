@@ -1,5 +1,8 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Staff
 {
     private $table = 'users';
@@ -14,11 +17,17 @@ class Staff
     public $fields;
     public $status_code;
     public $is_admin;
+    
 
 
     public function signup()
     {
         require_once '../library/Validator.php';
+
+
+        require '../PHPMailer/src/Exception.php';
+        require '../PHPMailer/src/PHPMailer.php';
+        require '../PHPMailer/src/SMTP.php';
         $validator = new Validator();
         $errors = [];
         $message = null;
@@ -119,22 +128,70 @@ class Staff
                     'user_id' => $user_id,
                     'shop_id' => $shop_id,
                 ];
-                DB::insert('user_shop', $user_shop);
+             $result =   DB::insert('user_shop', $user_shop);
+
+                if($result){
 
 
-                $to = $email;
-                $subject = 'Mahir Floral Management App: Registration successful';
-                $message = 'You have been registered with the Mahir Floral Management App. Please use following credentials for login.
-                 email =' + $email + ' password=' + $password;
-                $headers = 'From: tasmina@mahirfloralevents.com' . "\r\n" .
-                    'Reply-To: tasmina@mahirfloralevents.com' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion();
 
-                mail($to, $subject, $message, $headers);
 
-                echo json_encode(['status' => true, 'message' => 'Successfully Registration', 'user_id' => $user_id]);
-                exit;
-                return ['status' => true, 'message' => 'Successfully Login', 'access_token' => $api_key];
+
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                       // $mail->SMTPDebug = 2;                                       // Enable verbose debug output
+                        $mail->isSMTP();                                            // Set mailer to use SMTP
+                        $mail->Host       = 'mahirfloralevents.com';  // Specify main and backup SMTP servers
+                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                        $mail->Username   = 'admin@mahirfloralevents.com';                     // SMTP username
+                        $mail->Password   = 'Admin@@1234';                               // SMTP password
+                        $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, `ssl` also accepted
+                        $mail->Port       = 465;                                    // TCP port to connect to
+
+                        //Recipients
+                        $mail->setFrom('admin@mahirfloralevents.com', 'Mahir Floral');
+                        $mail->addAddress($email, 'Joe User');     // Add a recipient
+                        //$mail->addAddress('ellen@example.com');               // Name is optional
+                        $mail->addReplyTo('no-reply@example.com', 'Mahir Floral');
+                        //$mail->addCC('cc@example.com');
+                        //$mail->addBCC('bcc@example.com');
+
+                        // Attachments
+                        //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+
+                        // Content
+                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->Subject = 'Mahir Floral Management App: Registration successful';
+                        $mail->Body    = "An account has been created with this email address. Please use the following credentials for login into the app. <br><br> <b>Email: </b>".$email."<br> <b>Password : </b>".$password;
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        $mail->send();
+                       // echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    return ['status' => true, 'message' => 'Successfully Registration', 'user_id' => $user_id];
+                }else{
+                    return ['status' => false, 'message' => 'Unsuccessful Registration'];
+                }
+
+
+
             }
             return false;
         }
