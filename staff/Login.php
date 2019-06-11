@@ -10,12 +10,12 @@ $staff = new Staff();
 
 
 if($data = $staff->signin()){
-	http_response_code($staff->status_code);
+	//http_response_code($staff->status_code);
 	if($data['status'] == false){
 		echo json_encode($data);exit;
 	}
 		echo json_encode($data);exit;
 	}else{
-		http_response_code(503);
+		//http_response_code(503);
 		echo json_encode(['status' => false,"message" => "Unable To Signup Please try again later!"]);exit;
 	}

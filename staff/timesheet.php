@@ -13,7 +13,7 @@ $staff->id = $user;
 if($staff->check_role() == 'Admin'){
 
 	if($data = $staff->timesheet()){
-		http_response_code($staff->status_code);
+		//http_response_code($staff->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}
