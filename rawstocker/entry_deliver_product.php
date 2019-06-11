@@ -24,6 +24,6 @@ if($staff->check_role() == 'Raw Stock'){
 			echo json_encode($data);exit;
 	}
 }else{
-	http_response_code(403);
+	
 	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
 }
