@@ -164,7 +164,7 @@ class Staff
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
                         $mail->Subject = 'Mahir Floral Management App: Registration successful';
-                        $mail->Body    = "An account has been created with this email address. Please use the following credentials for login into the app. <br><br> <b>Email: </b>".$email."<br> <b>Password : </b>".$password;
+                        $mail->Body    = "An account has been created with this email address. Please use the following credentials for login into the app. <br><br> <b>Email: </b>".$email."<br> <b>Password : </b>".$password."<br><br> Please use the following link to download the app: <a href='https://drive.google.com/file/d/1_3fXDz0n5bREViOutp1d-w6Mn0-LTEne/view?usp=sharing'>Download Mahir Floral App</a>";;
                         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                         $mail->send();
