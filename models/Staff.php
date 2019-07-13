@@ -233,6 +233,16 @@ class Staff
         return false;
     }
 
+    public function getUserName($id)
+    {
+        $user_info = DB::query("SELECT name FROM users WHERE id = %i", $id);
+        $user_info = _row_array($user_info);
+        if ($user_info) {
+            return $user_info['name'];
+        }
+        return false;
+    }
+
     public function signin()
     {
         require_once '../library/Validator.php';

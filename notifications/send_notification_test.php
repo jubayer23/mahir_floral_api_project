@@ -15,7 +15,6 @@ $title = 'test';
 $message = 'this is test message';
 $imageUrl = '';
 $action = '';
-
 $actionDestination = '';
 
 if ($actionDestination == '') {
@@ -27,10 +26,12 @@ $notification->setImage($imageUrl);
 $notification->setAction($action);
 $notification->setActionDestination($actionDestination);
 
-$firebase_token = $_POST['firebase_token'];
+$firebase_token = 'aaadsd';
 $firebase_api = 'AAAAhGDHEv8:APA91bFm8qhvB-96rE-rejAluemlBtMLdhd8-O4A_ZfEbhEG3Hc-NgzONY380FRlKmbww9IEJts1WItw3FCuKMTeDX75iZu38qqthd82GU5YBVAD5Eh8BX-RZh6E03PXlmq30_Ib4-N7';
 
-//$topic = $_POST['topic'];
+
+
+$topic = isset($_POST['topic'])?$_POST['topic']:'Admin';
 
 $requestData = $notification->getNotificatin();
 
@@ -40,13 +41,18 @@ $requestData = $notification->getNotificatin();
         'data' => $requestData,
     );
 
-} else {*/
+} else {
 
     $fields = array(
         'to' => $firebase_token,
         'data' => $requestData,
     );
-//}
+}*/
+
+$fields = array(
+    'to' => '/topics/' . $topic,
+    'data' => $requestData,
+);
 
 
 // Set POST variables

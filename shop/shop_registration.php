@@ -16,7 +16,7 @@ $staff->id = $user;
 
 if($staff->check_role() == 'Admin'){
 	if($data = $shop->add()){
-		http_response_code($shop->status_code);
+		//http_response_code($shop->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}

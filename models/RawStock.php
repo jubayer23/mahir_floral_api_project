@@ -1,5 +1,7 @@
 <?php
 require_once '../library/Validator.php';
+require_once '../notifications/SendNotification.php';
+include_once '../config/constants.php';
 
 class RawStock
 {
@@ -15,9 +17,11 @@ class RawStock
     public $added_by;
     public $is_admin;
 
-    public function add()
+    public function add($username)
     {
         $validator = new Validator();
+        $sendNotification = new SendNotification();
+
         $errors = [];
         $message = null;
         $_POST = (array)json_decode(file_get_contents("php://input", true));
@@ -77,6 +81,12 @@ class RawStock
             $added = DB::insert($this->table, $shop_data);
             if ($added) {
                 $raw_stock_id = DB::insertId();
+
+                $title = 'New Raw Item Added';
+                $bodyMessage = $product_name ." has been added by " . $username;
+
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN);
+
                 //$this->status_code = 201;
                 return array('status' => true, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock Successfully Added');
             }
