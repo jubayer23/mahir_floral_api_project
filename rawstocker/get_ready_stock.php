@@ -22,7 +22,7 @@ if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'  || $s
 	}
 	
 	if($data = $readystock->get()){
-		http_response_code($readystock->status_code);
+		//http_response_code($readystock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}

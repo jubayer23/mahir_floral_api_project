@@ -17,7 +17,7 @@ $shopstock->delivery_by =   $user;
 
 if($staff->check_role() == 'Raw Stock'){
 	if($data = $shopstock->add()){
-		http_response_code($shopstock->status_code);
+		//http_response_code($shopstock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}

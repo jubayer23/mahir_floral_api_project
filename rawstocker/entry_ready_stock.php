@@ -17,7 +17,7 @@ $readystock->added_by =   $user;
 
 if($staff->check_role() == 'Raw Stock'){
 	if($data = $readystock->add()){
-		http_response_code($readystock->status_code);
+		//http_response_code($readystock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}

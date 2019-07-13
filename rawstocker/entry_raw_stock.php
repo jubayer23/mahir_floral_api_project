@@ -15,7 +15,7 @@ $user = $api_key->validate_api_key();
 $rawstock->added_by = $staff->id = $user;
 if($staff->check_role() == 'Raw Stock'){
 	if($data = $rawstock->add()){
-		http_response_code($rawstock->status_code);
+		//http_response_code($rawstock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
 		}
