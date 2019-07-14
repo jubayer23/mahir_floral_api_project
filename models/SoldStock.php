@@ -1,5 +1,6 @@
 <?php 
 	require_once '../library/Validator.php';
+include_once '../config/constants.php';
   class SoldStock {
     private $table = 'sold_stock';
 

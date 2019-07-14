@@ -72,6 +72,8 @@ class SendNotification
 // Close connection
         curl_close($ch);
 
+   
+
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 require_once '../library/Validator.php';
 require_once '../notifications/SendNotification.php';
+include_once '../config/constants.php';
 class ReadyStock
 {
     private $table = 'ready_stock';
