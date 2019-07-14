@@ -16,6 +16,8 @@ class SendNotification
         //$message = 'this is test message';
         $imageUrl = '';
 
+        $topicWithoutSpace = preg_replace('/\s+/', '', $topic);
+
 
         if ($actionDestination == '') {
             $action = '';
@@ -34,7 +36,7 @@ class SendNotification
         $requestData = $notification->getNotificatin();
 
         $fields = array(
-            'to' => '/topics/' . $topic,
+            'to' => '/topics/' . $topicWithoutSpace,
             'data' => $requestData,
         );
 
