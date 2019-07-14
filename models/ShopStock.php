@@ -126,7 +126,7 @@ require_once '../notifications/SendNotification.php';
                 $title = 'Product Delivery On The Way';
                 $bodyMessage = "Distributor received a product. Received from " . $username . ". Will deliver to " . $shop_name;
 
-                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_INCOMINGSTOCK);
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_INCOMINGSTOCK, $shop_id , $shop_name);
 
 
                 return array('status' => true,'shop_stock_id' => $shop_stock_id, 'message' => 'Ready To Deliver Shop Stocker');
@@ -367,6 +367,7 @@ require_once '../notifications/SendNotification.php';
 	public function entry_receive_stock()
     {
 		$validator = new Validator();
+		$sendNotification = new SendNotification();
 		$errors = [];
 		$message = null;
 		$_POST = (array) json_decode(file_get_contents("php://input", true));
@@ -405,6 +406,14 @@ require_once '../notifications/SendNotification.php';
 			$message = 'Required field missing';
 			$errors['shop_stock_id'] = "Shop Stock Is Require";
 		}
+
+		if(isset($_POST['shop_name']) && (trim($_POST['shop_name']) != '') ) {
+			$shop_name = $_POST['shop_name'];
+		}else {
+			$message = 'Required field missing';
+			$errors['shop_name'] = "Shop Name Is Require";
+		}
+
 		if(!empty($errors)){
 			$this->status_code = 400;
 			return ['status' => false , 'message'  => $message , 'errors'  => $errors];
@@ -417,6 +426,15 @@ require_once '../notifications/SendNotification.php';
 				'received_date' => date('Y-m-d H:i:s'),
 				'delivery_status' => 1
 			 ), "id=%i", $shop_stock_id);
+
+
+			$title = 'Product Received';
+			$bodyMessage = $shop_name. "received a new product. Received by: ";
+
+			$sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_SHOPSTOCK, $shop_stock_id, $shop_name);
+
+
+
 			return array('status' => true, 'message' => 'Successfully Shop Stock Updated');
 
 		}

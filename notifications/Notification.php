@@ -11,6 +11,8 @@ class Notification{
     private $image_url;
     private $action;
     private $action_destination;
+    private $shop_id;
+    private $shop_name;
     private $data;
 
     function __construct(){
@@ -41,6 +43,40 @@ class Notification{
         $this->data = $data;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getShopId()
+    {
+        return $this->shop_id;
+    }
+
+    /**
+     * @param mixed $shop_id
+     */
+    public function setShopId($shop_id)
+    {
+        $this->shop_id = $shop_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShopName()
+    {
+        return $this->shop_name;
+    }
+
+    /**
+     * @param mixed $shop_name
+     */
+    public function setShopName($shop_name)
+    {
+        $this->shop_name = $shop_name;
+    }
+
+
+
     public function getNotificatin(){
         $notification = array();
         $notification['title'] = $this->title;
@@ -48,6 +84,8 @@ class Notification{
         $notification['image'] = $this->image_url;
         $notification['action'] = $this->action;
         $notification['action_destination'] = $this->action_destination;
+        $notification['shop_id'] = $this->shop_id;
+        $notification['shop_name'] = $this->shop_name;
         return $notification;
     }
 }

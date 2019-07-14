@@ -14,9 +14,10 @@ $api_key = new Api_key();
 $user = $api_key->validate_api_key();
 $staff->id = $user;
 $shopstock->received_by =   $user;
+$username = $staff->getUserName($user);
 
 if($staff->check_role() == 'Shop Stock'){
-	if($data = $shopstock->entry_receive_stock()){
+	if($data = $shopstock->entry_receive_stock($username)){
 		//http_response_code($shopstock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;

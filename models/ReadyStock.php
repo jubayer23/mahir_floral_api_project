@@ -97,7 +97,7 @@ class ReadyStock
                 $title = 'Product Ready';
                 $bodyMessage = $product_name ." is ready for delivery. Added by " . $username;
 
-                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_READYSTOCK);
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_READYSTOCK, '', '');
 
 
                 return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully Added');

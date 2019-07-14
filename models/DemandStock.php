@@ -120,10 +120,10 @@ class DemandStock
                 $demand_id = DB::insertId();
 
                 $title = 'Product Delivery On The Way';
-                $bodyMessage = "A new product is demanded. Demanded by " . $shop_name;
+                $bodyMessage = "A new product is demanded. Demanded shop name: " . $shop_name;
 
-                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_DEMANDSTOCK);
-                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_DISTRIBUTOR, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_DEMANDSTOCK);
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_DEMANDSTOCK, $shop_id , $shop_name );
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_DISTRIBUTOR, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_DEMANDSTOCK,$shop_id , $shop_name);
 
 
                 return array('status' => true, 'demand_id' => $demand_id, 'message' => 'Demand successful');

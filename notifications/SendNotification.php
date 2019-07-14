@@ -10,7 +10,7 @@
 include_once '../notifications/Notification.php';
 class SendNotification
 {
-    function sendToTopic($title, $message, $topic, $action, $actionDestination){
+    function sendToTopic($title, $message, $topic, $action, $actionDestination, $shop_id, $shop_name){
         $notification = new Notification();
         //$title = 'test';
         //$message = 'this is test message';
@@ -25,6 +25,8 @@ class SendNotification
         $notification->setImage($imageUrl);
         $notification->setAction($action);
         $notification->setActionDestination($actionDestination);
+        $notification->setShopId($shop_id);
+        $notification->setShopName($shop_name);
 
         $firebase_token = 'aaadsd';
         $firebase_api = 'AAAAhGDHEv8:APA91bFm8qhvB-96rE-rejAluemlBtMLdhd8-O4A_ZfEbhEG3Hc-NgzONY380FRlKmbww9IEJts1WItw3FCuKMTeDX75iZu38qqthd82GU5YBVAD5Eh8BX-RZh6E03PXlmq30_Ib4-N7';
