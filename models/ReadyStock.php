@@ -1,6 +1,6 @@
 <?php
 require_once '../library/Validator.php';
-
+require_once '../notifications/SendNotification.php';
 class ReadyStock
 {
     private $table = 'ready_stock';
@@ -16,10 +16,11 @@ class ReadyStock
     public $added_by;
     public $is_admin;
 
-    public function add()
+    public function add($username)
     {
         //product_name, price, quantity, unit, date, color, comment, user_id
         $validator = new Validator();
+        $sendNotification = new SendNotification();
         $errors = [];
         $message = null;
         $_POST = (array)json_decode(file_get_contents("php://input", true));
@@ -92,6 +93,13 @@ class ReadyStock
             if ($added) {
                 $ready_stock_id = DB::insertId();
                 $this->status_code = 201;
+
+                $title = 'Product Ready';
+                $bodyMessage = $product_name ." is ready for delivery. Added by " . $username;
+
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_READYSTOCK);
+
+
                 return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully Added');
             }
         }

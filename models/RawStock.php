@@ -85,7 +85,7 @@ class RawStock
                 $title = 'New Raw Item Added';
                 $bodyMessage = $product_name ." has been added by " . $username;
 
-                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN);
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_RAWSTOCK);
 
                 //$this->status_code = 201;
                 return array('status' => true, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock Successfully Added');

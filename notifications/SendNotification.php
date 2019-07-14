@@ -10,13 +10,12 @@
 include_once '../notifications/Notification.php';
 class SendNotification
 {
-    function sendToTopic($title, $message, $topic){
+    function sendToTopic($title, $message, $topic, $action, $actionDestination){
         $notification = new Notification();
         //$title = 'test';
         //$message = 'this is test message';
         $imageUrl = '';
-        $action = '';
-        $actionDestination = '';
+
 
         if ($actionDestination == '') {
             $action = '';
