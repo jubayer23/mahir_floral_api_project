@@ -1,5 +1,6 @@
 <?php 
-	require_once '../library/Validator.php';
+require_once '../library/Validator.php';
+require_once '../notifications/SendNotification.php';
   class ShopStock {
     private $table = 'shop_stock';
 
@@ -19,10 +20,11 @@
 	
 	//raw_stock user entry 
 	//shop stock accept it..
- 	public function add()
+ 	public function add($username)
     {
 		//product_name, price, quantity, unit, date, color, comment, user_id
 		$validator = new Validator();
+        $sendNotification = new SendNotification();
 		$errors = [];
 		$message = null;
 		$_POST = (array) json_decode(file_get_contents("php://input", true));
@@ -114,7 +116,13 @@
 				$is_update = DB::query("UPDATE ready_stock SET quantity= quantity - %i WHERE id=%i", $quantity, $product_id);
 				$this->status_code = 201;
 
-				return array('status' => true,'shop_stock_id' => $shop_stock_id, 'message' => 'Ready To Deliver Shop Stocker');
+                $title = 'Product Delivery On The Way';
+                $bodyMessage = "Distributor received a product. Delivered by " . $username;
+
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_INCOMINGSTOCK);
+
+
+                return array('status' => true,'shop_stock_id' => $shop_stock_id, 'message' => 'Ready To Deliver Shop Stocker');
 			}
 		}
 		

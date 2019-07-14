@@ -14,9 +14,10 @@ $api_key = new Api_key();
 $user = $api_key->validate_api_key();
 $staff->id = $user;
 $shopstock->delivery_by =   $user;
+$username = $staff->getUserName($user);
 
 if($staff->check_role() == 'Raw Stock'){
-	if($data = $shopstock->add()){
+	if($data = $shopstock->add($username)){
 		//http_response_code($shopstock->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
