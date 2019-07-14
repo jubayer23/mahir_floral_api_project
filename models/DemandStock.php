@@ -1,6 +1,6 @@
 <?php
 require_once '../library/Validator.php';
-
+require_once '../notifications/SendNotification.php';
 class DemandStock
 {
     private $table = 'on_demand';
@@ -20,6 +20,7 @@ class DemandStock
     {
         //product_name, price, quantity, unit, date, color, comment, user_id
         $validator = new Validator();
+        $sendNotification = new SendNotification();
         $errors = [];
         $message = null;
         $_POST = (array)json_decode(file_get_contents("php://input", true));
@@ -87,6 +88,13 @@ class DemandStock
             $errors['priority'] = "priority Is Require";
         }
 
+        if(isset($_POST['shop_name']) && (trim($_POST['shop_name']) != '') ) {
+            $shop_name = $_POST['shop_name'];
+        }else {
+            $message = 'Required field missing';
+            $errors['shop_name'] = "Shop Name Is Require";
+        }
+
         if (!empty($errors)) {
             $this->status_code = 400;
             return ['status' => false, 'message' => $message, 'errors' => $errors];
@@ -111,6 +119,11 @@ class DemandStock
             if ($added) {
                 $demand_id = DB::insertId();
 
+                $title = 'Product Delivery On The Way';
+                $bodyMessage = "A new product is demanded. Demanded by " . $shop_name;
+
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_DEMANDSTOCK);
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_DISTRIBUTOR, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_DEMANDSTOCK);
 
 
                 return array('status' => true, 'demand_id' => $demand_id, 'message' => 'Demand successful');

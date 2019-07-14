@@ -21,6 +21,7 @@ $api_key = new Api_key();
 $user = $api_key->validate_api_key();
 $staff->id = $user;
 $demandStock->demanded_by =   $user;
+$username = $staff->getUserName($user);
 
 if($staff->check_role() == 'Shop Stock'){
     if($data = $demandStock->makeDemand()){

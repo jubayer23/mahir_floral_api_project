@@ -88,6 +88,13 @@ require_once '../notifications/SendNotification.php';
 			$message = 'Required field missing';
 			$errors['comment'] = "Comment Is Require";
 		}
+
+        if(isset($_POST['shop_name']) && (trim($_POST['shop_name']) != '') ) {
+            $shop_name = $_POST['shop_name'];
+        }else {
+            $message = 'Required field missing';
+            $errors['shop_name'] = "Shop Name Is Require";
+        }
 		
 		if(!empty($errors)){
 			$this->status_code = 400;
@@ -117,7 +124,7 @@ require_once '../notifications/SendNotification.php';
 				$this->status_code = 201;
 
                 $title = 'Product Delivery On The Way';
-                $bodyMessage = "Distributor received a product. Delivered by " . $username;
+                $bodyMessage = "Distributor received a product. Received from " . $username . ". Will deliver to " . $shop_name;
 
                 $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_INCOMINGSTOCK);
 
