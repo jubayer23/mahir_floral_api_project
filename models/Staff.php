@@ -164,7 +164,7 @@ class Staff
                         // Content
                         $mail->isHTML(true);                                  // Set email format to HTML
                         $mail->Subject = 'Mahir Floral Management App: Registration successful';
-                        $mail->Body    = "An account has been created with this email address. Please use the following credentials for login into the app. <br><br> <b>Email: </b>".$email."<br> <b>Password : </b>".$password."<br><br> Please use the following link to download the app: <a href='https://drive.google.com/file/d/1_3fXDz0n5bREViOutp1d-w6Mn0-LTEne/view?usp=sharing'>Download Mahir Floral App</a>";;
+                        $mail->Body    = "An account has been created with this email address. Please use the following credentials for login into the app. <br><br> <b>Email: </b>".$email."<br> <b>Password : </b>".$password."<br><br> Please use the following link to download the app: <a href='https://drive.google.com/file/d/1OX9w0VsB_Ty_xtfX-EHXDwoTynuQYYT1/view?usp=sharing'>Download Mahir Floral App</a>";;
                         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
                         $mail->send();
@@ -570,6 +570,14 @@ class Staff
                 DB::update('users', array('is_online' => $user_check), "id=%i", $user_id);
                 //$this->status_code = 201;
                 //array('status' => true, 'message' => null, 'Online' => $user_exist['is_online'], 'last_checked_in' => $user_checks_by_id[0]['check_in']);
+                $title = $username. ' just checked-out';
+                $bodyMessage = 'Checked-out time is: '. $check_in;
+
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_HQMENU, '', '');
+
+
+
+
                 return array('status' => true,
                     'message' => 'User Successfully Check-out',
                     'Online' => $user_check,
@@ -577,10 +585,6 @@ class Staff
                     'last_checked_out' => $check_out
                 );
 
-                $title = $username. 'just checked-out';
-                $bodyMessage = 'Checked-out time is: '. $check_in;
-
-                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_HQMENU, '', '');
 
 
 
@@ -615,7 +619,7 @@ class Staff
                     // $this->status_code = 201;
                     // return array('status' => true, 'message' => 'User Successfully Check-in');
 
-                    $title = $username. 'just checked-in';
+                    $title = $username. ' just checked-in';
                     $bodyMessage = 'Checked-in time is: '. $check_in;
 
                     $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_HQMENU, '', '');
