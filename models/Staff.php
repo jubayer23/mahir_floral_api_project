@@ -292,9 +292,10 @@ class Staff
                     $api_key = new Api_key();
                     $api_key = $api_key->set_api_key($user_info['id']);
                     //Update Login user Status
-                    DB::update($this->table, array(
-                        'is_online' => 1
+                    /*DB::update($this->table, array(
+                        'is_online' => 0
                     ), "id=%i", $user_info['id']);
+                    */
                     return array('status' => true, 'message' => 'Successfully Login', 'access_token' => $api_key);
                 }
                 //$this->status_code = 401;
