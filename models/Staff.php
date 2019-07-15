@@ -465,9 +465,13 @@ class Staff
       }*/
 
 
-    public function user_check()
+    public function user_check($username)
     {
         require_once '../library/Validator.php';
+        require_once '../notifications/SendNotification.php';
+        require_once '../config/constants.php';
+
+        $sendNotification = new SendNotification();
         $validator = new Validator();
 
         $errors = [];
@@ -573,6 +577,12 @@ class Staff
                     'last_checked_out' => $check_out
                 );
 
+                $title = $username. 'just checked-out';
+                $bodyMessage = 'Checked-out time is: '. $check_in;
+
+                $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_HQMENU, '', '');
+
+
 
             } else {
 
@@ -604,6 +614,14 @@ class Staff
                     DB::update('users', array('is_online' => $user_check), "id=%i", $user_id);
                     // $this->status_code = 201;
                     // return array('status' => true, 'message' => 'User Successfully Check-in');
+
+                    $title = $username. 'just checked-in';
+                    $bodyMessage = 'Checked-in time is: '. $check_in;
+
+                    $sendNotification->sendToTopic($title, $bodyMessage, ROLE_ADMIN, NOTIFICATION_ACTION, NOTIFICATION_DESTINATION_HQMENU, '', '');
+
+
+
                     return array('status' => true,
                         'message' => 'User Successfully Check in',
                         'Online' => $user_check,

@@ -7,10 +7,13 @@ include_once '../models/Staff.php';
 include_once '../models/Api_key.php';
 
 $staff = new Staff();
-//$api_key = new Api_key();
-//$user = $api_key->validate_api_key();
+$api_key = new Api_key();
+$user = $api_key->validate_api_key();
+$username = $staff->getUserName($user);
+
+
 //if($staff->check_role() == 'Admin'){
-	if($data = $staff->user_check()){
+	if($data = $staff->user_check($username)){
 		//http_response_code($staff->status_code);
 		if($data['status'] == false){
 			echo json_encode($data);exit;
