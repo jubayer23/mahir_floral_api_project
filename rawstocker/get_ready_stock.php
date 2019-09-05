@@ -13,7 +13,7 @@ $api_key = new Api_key();
 
 $user = $api_key->validate_api_key();
 $readystock->added_by = $staff->id = $user;
-if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'  || $staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Distributor'){
+/*if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'  || $staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Distributor'){*/
 	
 	if($staff->check_role() == 'Admin'){
 		$readystock->is_admin = true;
@@ -28,7 +28,7 @@ if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'  || $s
 		}
 			echo json_encode($data);exit;
 	}
-}else{
+/*}else{
 	
 	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
-}
+}*/

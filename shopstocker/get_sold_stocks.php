@@ -14,7 +14,7 @@ $api_key = new Api_key();
 $user = $api_key->validate_api_key();
 $soldstock->seller_by = $staff->id = $user;
 
-if($staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Admin' ){
+/*if($staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Admin' ){*/
 	/*if($staff->check_role() == 'Admin'){
 		$shopstock->is_admin = true;
 	}else{
@@ -28,7 +28,7 @@ if($staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Admin' ){
 		}
 			echo json_encode($data);exit;
 	}
-}else{
+/*}else{
 	//http_response_code(403);
 	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
-}
+}*/

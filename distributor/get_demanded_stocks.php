@@ -21,7 +21,7 @@ $user = $api_key->validate_api_key();
 $staff->id = $user;
 $demandStock->demanded_by =   $user;
 
-if($staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Admin' || $staff->check_role() == 'Distributor'){
+/*if($staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Admin' || $staff->check_role() == 'Distributor'){*/
     if($data = $demandStock->getDemandedStocks()){
         //http_response_code($shopstock->status_code);
         if($data['status'] == false){
@@ -29,7 +29,7 @@ if($staff->check_role() == 'Shop Stock' || $staff->check_role() == 'Admin' || $s
         }
         echo json_encode($data);exit;
     }
-}else{
+/*}else{
     //http_response_code(403);
     echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action"]);exit;
-}
+}*/

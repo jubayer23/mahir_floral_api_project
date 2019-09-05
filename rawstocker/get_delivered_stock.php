@@ -14,8 +14,10 @@ $api_key = new Api_key();
 $user = $api_key->validate_api_key();
 $staff->id = $user;
 $shopstock->delivery_by =   $user;
-
-if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'){
+/*
+ *  This is actually supplies stocks
+ * */
+/*if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'){*/
 	if($data = $shopstock->getDeliveredStocks()){
 		//http_response_code($shopstock->status_code);
 		if($data['status'] == false){
@@ -23,6 +25,6 @@ if($staff->check_role() == 'Raw Stock' || $staff->check_role() == 'Admin'){
 		}
 			echo json_encode($data);exit;
 	}
-}else{
+/*}else{
 	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
-}
+}*/
