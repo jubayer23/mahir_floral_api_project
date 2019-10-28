@@ -24,5 +24,5 @@ if($staff->check_role() == 'Admin'){
 	}
 }else{
 	
-	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this action!"]);exit;
+	echo json_encode(['status' => false , 'message' => "You do not have the permission to perform this actions!"]);exit;
 }
