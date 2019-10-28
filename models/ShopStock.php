@@ -347,7 +347,7 @@ include_once '../config/constants.php';
 			FROM `shop_stock` S 
 			JOIN shop D On D.id = S.shop_id 
 			JOIN ready_stock R On R.id = S.product_id
-			WHERE S.delivery_status = 0 AND YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']." AND S.shop_id = ".$_POST['filter_by_shop_id']
+			WHERE S.delivery_status = 0 AND YEAR(delivery_date) = ".$_POST['year']."  AND MONTH(delivery_date) = ".$_POST['month']." AND S.shop_id = ".$_POST['filter_by_shop_id']
 			  );//
 
 			  if($shopStocks ){
