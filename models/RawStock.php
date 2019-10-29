@@ -95,6 +95,44 @@ class RawStock
 
     }
 
+    public function deleteRawStock(){
+        $errors = [];
+        $message = null;
+        $_POST = (array)json_decode(file_get_contents("php://input", true));
+
+        if (isset($_POST['raw_stock_id']) && (trim($_POST['raw_stock_id']) != '')) {
+
+            $raw_stock_exist = DB::query("SELECT * FROM raw_stock WHERE id = %i",$_POST['raw_stock_id']);
+            $raw_stock_exist = _row_array($raw_stock_exist);
+            if(!$raw_stock_exist){
+                $errors['raw_stock_id'] = "Raw Stock not exist";
+            }else{
+                $raw_stock_id = $_POST['raw_stock_id'];
+            }
+
+
+        } else {
+            $message = 'Required field missing';
+            $errors['raw_stock_id'] = "raw_stock_id Is Require";
+        }
+
+        if (!empty($errors)) {
+            //$this->status_code = 400;
+            return ['status' => false, 'message' => $message, 'errors' => $errors];
+
+        } else {
+            $delete = DB::query("DELETE FROM raw_stock WHERE id = %i",$raw_stock_id);
+            //var_dump($delete);
+            if($delete){
+                return array('status' => true, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock Successfully Deleted');
+            }else{
+                return array('status' => false, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock Delete Error from server');
+            }
+
+
+        }
+    }
+
     public function get()
     {
 
