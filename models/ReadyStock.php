@@ -108,6 +108,44 @@ class ReadyStock
 
     }
 
+    public function deleteReadyStock(){
+        $errors = [];
+        $message = null;
+        $_POST = (array)json_decode(file_get_contents("php://input", true));
+
+        if (isset($_POST['ready_stock_id']) && (trim($_POST['ready_stock_id']) != '')) {
+
+            $ready_stock_exist = DB::query("SELECT * FROM ready_stock WHERE id = %i",$_POST['ready_stock_id']);
+            $ready_stock_exist = _row_array($ready_stock_exist);
+            if(!$ready_stock_exist){
+                $errors['ready_stock_id'] = "Ready Stock not exist";
+            }else{
+                $ready_stock_exist = $_POST['ready_stock_id'];
+            }
+
+
+        } else {
+            $message = 'Required field missing';
+            $errors['ready_stock_id'] = "ready_stock_id Is Require";
+        }
+
+        if (!empty($errors)) {
+            //$this->status_code = 400;
+            return ['status' => false, 'message' => $message, 'errors' => $errors];
+
+        } else {
+            $delete = DB::query("DELETE FROM ready_stock WHERE id = %i",$ready_stock_exist);
+            //var_dump($delete);
+            if($delete){
+                return array('status' => true, 'ready_stock_id' => $ready_stock_exist, 'message' => 'Ready Stock Successfully Deleted');
+            }else{
+                return array('status' => false, 'ready_stock_id' => $ready_stock_exist, 'message' => 'Ready Stock Delete Error from server');
+            }
+
+
+        }
+    }
+
     public function getshops()
     {
         $shops = DB::query("SELECT * FROM shop");
