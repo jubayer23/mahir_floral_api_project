@@ -146,6 +146,69 @@ class ReadyStock
         }
     }
 
+    public function updateReadyStock(){
+        $errors = [];
+        $message = null;
+        $_POST = (array)json_decode(file_get_contents("php://input", true));
+
+        if (isset($_POST['ready_stock_id']) && (trim($_POST['ready_stock_id']) != '')) {
+
+            $ready_stock_exist = DB::query("SELECT * FROM ready_stock WHERE id = %i",$_POST['ready_stock_id']);
+            $ready_stock_exist = _row_array($ready_stock_exist);
+            if(!$ready_stock_exist){
+                $errors['ready_stock_id'] = "Ready Stock not exist";
+            }else{
+                $ready_stock_id = $_POST['ready_stock_id'];
+            }
+
+
+        } else {
+            $message = 'Required field missing';
+            $errors['ready_stock_id'] = "ready_stock_id Is Require";
+        }
+
+
+
+        if(isset($_POST['product_name']) && (trim($_POST['product_name']) != '')){
+            $product_name = $_POST['product_name'];
+        }else{
+            $message = 'Required field missing';
+            $errors['error'] = "Product name field Is Require";
+        }
+
+
+        if(isset($_POST['quantity']) && (trim($_POST['quantity']) != '')){
+            $quantity = $_POST['quantity'];
+        }else{
+            $message = 'Required field missing';
+            $errors['quantity'] = "Quantity field Is Require";
+        }
+
+        if(isset($_POST['price']) && (trim($_POST['price']) != '')){
+            $price = $_POST['price'];
+        }else{
+            $message = 'Required field missing';
+            $errors['price'] = "Price field Is Require";
+        }
+
+        if (!empty($errors)) {
+            //$this->status_code = 400;
+            return ['status' => false, 'message' => $message, 'errors' => $errors];
+
+        } else {
+            $update = DB::query("UPDATE `ready_stock` SET `product_name`= '$product_name', `quantity`= '$quantity', `price`= '$price'   WHERE id =%i",$ready_stock_id);
+            //var_dump($delete);
+            if($update){
+                return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully updated');
+            }else{
+                return array('status' => false, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock update Error from server');
+            }
+
+
+        }
+
+    }
+
     public function getshops()
     {
         $shops = DB::query("SELECT * FROM shop");

@@ -156,8 +156,8 @@ class RawStock
 
 
 
-        if(isset($_POST['item_name']) && (trim($_POST['item_name']) != '')){
-            $item_name = $_POST['item_name'];
+        if(isset($_POST['product_name']) && (trim($_POST['product_name']) != '')){
+            $product_name = $_POST['product_name'];
         }else{
             $message = 'Required field missing';
             $errors['error'] = "Product name field Is Require";
@@ -176,7 +176,7 @@ class RawStock
             return ['status' => false, 'message' => $message, 'errors' => $errors];
 
         } else {
-            $update = DB::query("UPDATE `raw_stock` SET `product_name`= '$item_name', quantity`= '$quantity'   WHERE id =%i",$raw_stock_id);
+            $update = DB::query("UPDATE `raw_stock` SET `product_name`= '$product_name', `quantity`= '$quantity'   WHERE id =%i",$raw_stock_id);
             //var_dump($delete);
             if($update){
                 return array('status' => true, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock Successfully updated');
