@@ -120,7 +120,7 @@ class ReadyStock
             if(!$ready_stock_exist){
                 $errors['ready_stock_id'] = "Ready Stock not exist";
             }else{
-                $ready_stock_exist = $_POST['ready_stock_id'];
+                $ready_stock_id = $_POST['ready_stock_id'];
             }
 
 
@@ -134,12 +134,12 @@ class ReadyStock
             return ['status' => false, 'message' => $message, 'errors' => $errors];
 
         } else {
-            $delete = DB::query("DELETE FROM ready_stock WHERE id = %i",$ready_stock_exist);
+            $delete = DB::query("DELETE FROM ready_stock WHERE id = %i",$ready_stock_id);
             //var_dump($delete);
             if($delete){
-                return array('status' => true, 'ready_stock_id' => $ready_stock_exist, 'message' => 'Ready Stock Successfully Deleted');
+                return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully Deleted');
             }else{
-                return array('status' => false, 'ready_stock_id' => $ready_stock_exist, 'message' => 'Ready Stock Delete Error from server');
+                return array('status' => false, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Delete Error from server');
             }
 
 

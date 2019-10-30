@@ -133,6 +133,62 @@ class RawStock
         }
     }
 
+    public function updateRawStock(){
+        $errors = [];
+        $message = null;
+        $_POST = (array)json_decode(file_get_contents("php://input", true));
+
+        if (isset($_POST['raw_stock_id']) && (trim($_POST['raw_stock_id']) != '')) {
+
+            $raw_stock_exist = DB::query("SELECT * FROM raw_stock WHERE id = %i",$_POST['raw_stock_id']);
+            $raw_stock_exist = _row_array($raw_stock_exist);
+            if(!$raw_stock_exist){
+                $errors['raw_stock_id'] = "Raw Stock not exist";
+            }else{
+                $raw_stock_id = $_POST['raw_stock_id'];
+            }
+
+
+        } else {
+            $message = 'Required field missing';
+            $errors['raw_stock_id'] = "raw_stock_id Is Require";
+        }
+
+
+
+        if(isset($_POST['item_name']) && (trim($_POST['item_name']) != '')){
+            $item_name = $_POST['item_name'];
+        }else{
+            $message = 'Required field missing';
+            $errors['error'] = "Product name field Is Require";
+        }
+
+
+        if(isset($_POST['quantity']) && (trim($_POST['quantity']) != '')){
+            $quantity = $_POST['quantity'];
+        }else{
+            $message = 'Required field missing';
+            $errors['quantity'] = "Quantity field Is Require";
+        }
+
+        if (!empty($errors)) {
+            //$this->status_code = 400;
+            return ['status' => false, 'message' => $message, 'errors' => $errors];
+
+        } else {
+            $update = DB::query("UPDATE `raw_stock` SET `product_name`= '$item_name', quantity`= '$quantity'   WHERE id =%i",$raw_stock_id);
+            //var_dump($delete);
+            if($update){
+                return array('status' => true, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock Successfully updated');
+            }else{
+                return array('status' => false, 'raw_stock_id' => $raw_stock_id, 'message' => 'Raw Stock update Error from server');
+            }
+
+
+        }
+
+    }
+
     public function get()
     {
 
