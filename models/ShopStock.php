@@ -187,8 +187,7 @@ include_once '../config/constants.php';
 		}
 		
 	}
-	public function getShopStock()
-    {
+	public function getShopStock(){
 		$validator = new Validator();
 		$errors = [];
 		$message = null;
@@ -441,4 +440,5 @@ include_once '../config/constants.php';
 		}
 		
 	}
+
   }
