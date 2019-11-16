@@ -131,11 +131,11 @@ include_once '../config/constants.php';
             $return_stock = DB::query("SELECT * FROM $this->return_table WHERE id = %i AND status = 0 ",$_POST['return_stock_id']);
             if(!$return_stock){
 
-                $message = "This Return Stock item does not exist Or Already Received";
+                $message = "This Return Stock item does not exist Or Already Received ";
                 $errors['return_stock_id'] = "This return_stock item does not exist Or Already Received";
             }
         }else {
-            $message = 'Required field missing';
+            $message = 'Required field missing ';
             $errors['return_stock_id'] = "return_stock_id Stock Is Require";
         }
 
@@ -233,11 +233,11 @@ include_once '../config/constants.php';
               // deliver_to get from shop id
               //name get from readyStock product_name
               $returnStocks = DB::query("
-			SELECT RS.id,SHP.name as shop_name,RS.product_name,RS.price,RS.color,RS.unit,RTS.quantity,DATE_FORMAT(date(RTS.return_date), '%d/%m/%Y') as return_date,DATE_FORMAT(date(RTS.received_date), '%d/%m/%Y') as received_date,RTS.status, RTS.comment
+			SELECT RTS.id,SHP.name as shop_name,RS.product_name,RS.price,RS.color,RS.unit,RTS.quantity,DATE_FORMAT(date(RTS.return_date), '%d/%m/%Y') as return_date,DATE_FORMAT(date(RTS.received_date), '%d/%m/%Y') as received_date,RTS.status, RTS.comment
 			FROM `return_stock` RTS 
 			JOIN shop SHP On RTS.shop_id = SHP.id 
 			JOIN ready_stock RS On RS.id = RTS.product_id
-			WHERE RTS.status = 0 AND YEAR(RTS.return_date) = ".$_POST['year']."  AND MONTH(RTS.return_date) = ".$_POST['month']
+			WHERE YEAR(RTS.return_date) = ".$_POST['year']."  AND MONTH(RTS.return_date) = ".$_POST['month']
               );//
 
               if($returnStocks ){
