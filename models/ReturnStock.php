@@ -233,7 +233,7 @@ include_once '../config/constants.php';
               // deliver_to get from shop id
               //name get from readyStock product_name
               $returnStocks = DB::query("
-			SELECT RS.id,SHP.name as shop_name,RS.product_name,RS.price,RS.color,RS.unit,RTS.quantity,DATE_FORMAT(date(RTS.return_date), '%d/%m/%Y') as return_date,DATE_FORMAT(date(RTS.received_date), '%d/%m/%Y') as received_date,RTS.status
+			SELECT RS.id,SHP.name as shop_name,RS.product_name,RS.price,RS.color,RS.unit,RTS.quantity,DATE_FORMAT(date(RTS.return_date), '%d/%m/%Y') as return_date,DATE_FORMAT(date(RTS.received_date), '%d/%m/%Y') as received_date,RTS.status, RTS.comment
 			FROM `return_stock` RTS 
 			JOIN shop SHP On RTS.shop_id = SHP.id 
 			JOIN ready_stock RS On RS.id = RTS.product_id
