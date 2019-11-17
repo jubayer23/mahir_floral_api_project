@@ -263,7 +263,7 @@ class ReadyStock
 
             //$ready_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity,R.price, R.unit, DATE_FORMAT(date(R.date), '%d/%m/%Y') as received_date, R.color, R.comment, U.name as added_by FROM `ready_stock` R JOIN `users` U ON U.id = R.added_by WHERE  YEAR(date) = " . $_POST['year'] . "  AND MONTH(date) = " . $_POST['month']);//
 
-            $ready_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity,R.price, R.unit, R.date as received_date, R.color, R.comment, U.name as added_by FROM `ready_stock` R JOIN `users` U ON U.id = R.added_by WHERE  YEAR(date) = " . $_POST['year'] . "  AND MONTH(date) = " . $_POST['month'] . " AND R.quantity >= 0");//
+            $ready_stock = DB::query("SELECT R.id, R.product_name as name , R.quantity,R.price, R.unit, R.date as received_date, R.color, R.comment, U.name as added_by FROM `ready_stock` R JOIN `users` U ON U.id = R.added_by WHERE  YEAR(R.date) = " . $_POST['year'] . "  AND MONTH(R.date) = " . $_POST['month'] . " AND R.quantity >= 0");//
 
 
             if ($ready_stock) {
