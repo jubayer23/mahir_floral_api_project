@@ -166,12 +166,12 @@ include_once '../config/constants.php';
 		}else{
 			
 			$soldStocks = DB::query("
-			SELECT DISTINCT  S.id, D.name AS shop_name, R.product_name, R.price, R.unit, S.quantity, DATE_FORMAT( DATE(B.sell_date), '%d/%m/%Y' ) AS sold_date, S.comment
-			FROM `shop_stock` S 
-			JOIN shop D ON D.id = S.shop_id 
-			JOIN ready_stock R ON R.id = S.product_id 
-			JOIN sold_stock B ON B.shop_stock_id
-			WHERE  YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']			
+			SELECT  SLDS.id, SHP.name AS shop_name, RS.product_name, RS.price, RS.unit, RS.quantity, SLDS.sell_date AS sold_date, SLDS.comment
+			FROM 
+			sold_stock SLDS JOIN shop_stock SHPS ON SLDS.shop_stock_id = SHPS.id
+			JOIN ready_stock RS ON SLDS.product_id = RS.id
+			JOIN shop SHP ON SHPS.shop_id = SHP.id
+			WHERE  YEAR(SLDS.sell_date) = ".$_POST['year']."  AND MONTH(SLDS.sell_date) = ".$_POST['month']
 			);//
 
 			if($soldStocks ){

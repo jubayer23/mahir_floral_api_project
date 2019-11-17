@@ -253,11 +253,11 @@ include_once '../config/constants.php';
 			// deliver_to get from shop id 
 			//name get from readyStock product_name
 			$shopStocks = DB::query("
-			SELECT S.id,D.name as shop_name,R.id as product_id, R.product_name,R.price,R.color,R.unit,S.quantity,DATE_FORMAT(date(S.delivery_date), '%d/%m/%Y') as delivery_date,DATE_FORMAT(date(S.received_date), '%d/%m/%Y') as received_date,S.delivery_status,S.comment
+			SELECT S.id,D.name as shop_name,R.id as product_id, R.product_name,R.price,R.color,R.unit,S.quantity,S.delivery_date as delivery_date,S.received_date as received_date,S.delivery_status,S.comment
 			FROM `shop_stock` S 
 			JOIN shop D On D.id = S.shop_id 
 			JOIN ready_stock R On R.id = S.product_id
-			WHERE S.delivery_status = 1 AND YEAR(date) = ".$_POST['year']."  AND MONTH(date) = ".$_POST['month']." AND S.shop_id = ".$_POST['filter_by_shop_id']
+			WHERE S.delivery_status = 1 AND YEAR(S.received_date) = ".$_POST['year']."  AND MONTH(S.received_date) = ".$_POST['month']." AND S.shop_id = ".$_POST['filter_by_shop_id']
 			);//
 
 			if($shopStocks ){
