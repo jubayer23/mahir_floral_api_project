@@ -109,10 +109,11 @@ include_once '../config/constants.php';
 		$errors = [];
 		$message = null;
 		$_POST = (array) json_decode(file_get_contents("php://input", true));
+		$filter_by_shop_id ='';
 		
 		if(isset($_POST['filter_by_shop_id']) && (trim($_POST['filter_by_shop_id']) != '') ) {
 			if($validator->integer($_POST['filter_by_shop_id'])){
-				
+                $filter_by_shop_id = $_POST['filter_by_shop_id'];
 				//$shop_exist = DB::query("SELECT * FROM shop WHERE id = %i ",$_POST['filter_by_shop_id']);
 				//var_dump($shop_stock['shop_id'],$this->seller_by);die;
 				/*if(!$this->is_admin){
@@ -166,12 +167,12 @@ include_once '../config/constants.php';
 		}else{
 			
 			$soldStocks = DB::query("
-			SELECT  SLDS.id, SHP.name AS shop_name, RS.product_name, RS.price, RS.unit, RS.quantity, SLDS.sell_date AS sold_date, SLDS.comment
+			SELECT  SLDS.id, SHP.name AS shop_name, RS.product_name, RS.price, RS.unit, SLDS.quantity, SLDS.sell_date AS sold_date, SLDS.comment
 			FROM 
 			sold_stock SLDS JOIN shop_stock SHPS ON SLDS.shop_stock_id = SHPS.id
 			JOIN ready_stock RS ON SLDS.product_id = RS.id
 			JOIN shop SHP ON SHPS.shop_id = SHP.id
-			WHERE  YEAR(SLDS.sell_date) = ".$_POST['year']."  AND MONTH(SLDS.sell_date) = ".$_POST['month']
+			WHERE   SHPS.shop_id = $filter_by_shop_id AND YEAR(SLDS.sell_date) = ".$_POST['year']."  AND MONTH(SLDS.sell_date) = ".$_POST['month']
 			);//
 
 			if($soldStocks ){

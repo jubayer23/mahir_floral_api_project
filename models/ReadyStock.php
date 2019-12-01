@@ -134,20 +134,23 @@ class ReadyStock
             return ['status' => false, 'message' => $message, 'errors' => $errors];
 
         } else {
-            $delete = DB::query("DELETE FROM ready_stock WHERE id = %i",$ready_stock_id);
+            /*$delete = DB::query("DELETE FROM ready_stock WHERE id = %i",$ready_stock_id);
             //var_dump($delete);
             if($delete){
                 return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully Deleted');
             }else{
 
-                $update = DB::query("UPDATE `ready_stock` SET  `quantity`= -1,    WHERE id =%i",$ready_stock_id);
 
-                if($update){
-                    return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully Deleted');
-                }else{
-                    return array('status' => false, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Delete Error from server');
-                }
 
+            }*/
+
+
+            $update = DB::query("UPDATE `ready_stock` SET  `quantity`= -1 WHERE id =%i",$ready_stock_id);
+
+            if($update){
+                return array('status' => true, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Successfully Deleted');
+            }else{
+                return array('status' => false, 'ready_stock_id' => $ready_stock_id, 'message' => 'Ready Stock Delete Error from server');
             }
 
 
